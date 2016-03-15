@@ -80,6 +80,7 @@ public class AddNewUser extends HttpServlet {
 		String url = "/login.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request,response);
+		//TEST
 		
 	}
 	}
