@@ -83,6 +83,8 @@ private ResultSet results;
 		}
 		
 		return courseRatingArrayList;
+		
+		//TEST
 
 
 	}
