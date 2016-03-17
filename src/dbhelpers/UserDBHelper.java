@@ -32,7 +32,7 @@ public class UserDBHelper {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(url, uname, pw);
 		
-			authenticateUserStatement = conn.prepareStatement("select * from tomcatdb where golferEmail=? and golferPassword=?");
+			authenticateUserStatement = conn.prepareStatement("select * from Golfer where golferEmail=? and golferPassword=?");
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -57,7 +57,8 @@ public class UserDBHelper {
 			//JAJ Added three new user fields at the end.
 		
 			if (rs.next()) {
-				user = new User(rs.getInt("id"), rs.getString("gender"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getLong("handicapIndex"), rs.getInt("avgScoreGross"), rs.getInt("avgScoreNet"));
+				//user = new User(rs.getInt("id"), rs.getString("gender"), rs.getString("password"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), rs.getLong("handicapIndex"), rs.getInt("avgScoreGross"), rs.getInt("avgScoreNet"));
+				user = new User(rs.getInt("golferID"), rs.getString("golferGender"), rs.getString("golferPassword"), rs.getString("golferFirstName"), rs.getString("golferLastName"), rs.getString("golferEmail"), rs.getFloat("golferHandicapIndex"), rs.getInt("golferAvgScoreGross"), rs.getInt("golferAvgScoreNet"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());

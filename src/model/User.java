@@ -17,7 +17,7 @@ public class User {
 	private String golferFirstName;
 	private String golferLastName;
 	private String golferEmail;
-	private long golferHandicapIndex;
+	private float golferHandicapIndex;
 	private int golferAvgScoreGross;
 	private int golferAvgScoreNet;
 	
@@ -29,8 +29,8 @@ public class User {
 	 * @param lastName
 	 * @param email 
 	 * @param handicapIndex
-	 * @param avgGrossScore
-	 * @param avgNetScore 
+	 * @param avgScoreGross
+	 * @param avgScoreNet 
 	 */
 	
 	public User() {
@@ -48,7 +48,7 @@ public class User {
 
 	
 	public User(int id, String gender, String password, String firstName,
-			String lastName, String email, long handicapIndex, int avgScoreGross, int avgScoreNet) {
+			String lastName, String email, float handicapIndex, int avgScoreGross, int avgScoreNet) {
 		this.golferID = id;
 		this.golferGender = gender;
 		this.golferPassword = password;
@@ -136,13 +136,13 @@ public class User {
 	/**
 	 * @return the golferHandicapIndex
 	 */
-	public long getGolferHandicapIndex() {
+	public float getGolferHandicapIndex() {
 		return golferHandicapIndex;
 	}
 	/**
 	 * @param golferHandicapIndex the golferHandicapIndex to set
 	 */
-	public void setGolferHandicapIndex(long golferHandicapIndex) {
+	public void setGolferHandicapIndex(float golferHandicapIndex) {
 		this.golferHandicapIndex = golferHandicapIndex;
 	}
 	/**

@@ -51,11 +51,20 @@ public class AddNewUser extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");
+		System.out.println("I'm in the AddNewUser servlet and the user first name is "+ firstName);
+		System.out.println("I'm in the AddNewUser servlet and the user last name is "+ lastName);
+		System.out.println("I'm in the AddNewUser servlet and the user gender is "+ gender);
+		System.out.println("I'm in the AddNewUser servlet and the user email is "+ email);
+
 		
 		// JAJ update next three lines for new fields
-		int handicapIndex = Integer.parseInt(request.getParameter("handicap"));
-		int avgGrossScore = 0;
-		int avgNetScore = 0;
+		float handicapIndex = Float.valueOf(request.getParameter("handicap"));
+		int avgScoreGross = 0;
+		int avgScoreNet = 0;
+		
+		System.out.println("I'm in the AddNewUser servlet and the user handicap is "+ handicapIndex);
+		System.out.println("I'm in the AddNewUser servlet and the user avg gross score is "+ avgScoreGross);
+		System.out.println("I'm in the AddNewUser servlet and the user avg net score is "+ avgScoreNet);
 		
 		System.out.println("I'm in the AddNewUser servlet just about to encrypt password");
 		PasswordService pws = new PasswordService();
@@ -70,17 +79,18 @@ public class AddNewUser extends HttpServlet {
 		user.setEmail(email);
 		//added three lines to update three new fields
 		user.setGolferHandicapIndex(handicapIndex);
-		user.setGolferAvgScoreGross(avgGrossScore);
-		user.setGolferAvgScoreNet(avgNetScore);	
+		user.setGolferAvgScoreGross(avgScoreGross);
+		user.setGolferAvgScoreNet(avgScoreNet);	
 		
 		System.out.println("I'm in the AddNewUser servlet just about to call AddUser ");
 		AddUser uq = new AddUser("tomcatdb","root","bu11fr0g");
+		System.out.println("I'm in the AddNewUser servlet just about to call uq.doAdd(User) ");
 		uq.doAdd(user);
 		
-		String url = "/login.jsp";
+		System.out.println("Successfully added new user and will take golfer to login screen");
+		String url = "login.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request,response);
-		//TEST
 		
 	}
 	}

@@ -83,11 +83,11 @@ public class StartRoundServlet extends HttpServlet {
 				}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&	
 		//calculate course handicap for golfer who has handicap on profile 
-		long courseHandicap = 0;
+		float courseHandicap = 0;
 		session.setAttribute("handicap",courseHandicap);
 		
 		User user = (User) session.getAttribute("user");
-			long handicapIndex = (user.getGolferHandicapIndex());
+			float handicapIndex = (user.getGolferHandicapIndex());
 
 		if (handicapIndex >0) {
 			String gender = (user.getGender());
