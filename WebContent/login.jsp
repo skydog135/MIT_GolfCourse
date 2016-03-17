@@ -10,9 +10,8 @@
 <style>
 
 
-
+ System.out.println ("Code is in login.jsp");
 </style>
-
 <body>
 	<header>
 		<img src="http://www.golfcourse.uga.edu/sites/golfcourse.uga.edu/files/2013%20UGA%20Golf%20logo.png" />

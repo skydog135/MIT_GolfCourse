@@ -21,24 +21,24 @@
 			
 	</div>
 	<div id="new-user-form">
-	<form action="AddUser" method="post">
+	<form action="AddUser" method="get">
   		<p>First Name:
-		<input type="text" name="firstName" value= ""></p>
+		<input type="text" name="firstName"></p>
   		<p>Last Name:
-  		<input type="text" name="lastName" value= ""></p>
+  		<input type="text" name="lastName"></p>
 		<p>Gender:
-  		<select id="gender" name="gender" >
+  		<select id="gender" name="gender">
 			<option>Male</option>
 			<option>Female</option>
 		</select></p>
 		<p>Email:
-  		<input type="text" name="email" value=""></p>
+  		<input type="text" name="email"></p>
 		<p>Handicap:
-  		<input type="text" name="handicap" value=""></p>
+  		<input type="text" name="handicap"></p>
 		<p>Password:
-  		<input type="text" name="password" value=""></p>
+  		<input type="text" name="password"></p>
 		<p>Password<br>Confirmation:
-  		<input type="text" name="password" ></p>
+  		<input type="text" name="password"></p>
 		<div id="buttons">
 		<br>
 		<br>
