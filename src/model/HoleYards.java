@@ -5,33 +5,33 @@ package model;
 
 /**
  * @author jjewell_000
- *
+ * JAJ 3/20 CHANGED TEEID TO TEE / INT TO STRING
  */
 public class HoleYards {
 	private int holeYardsCourseID;
 	private int holeYardsHoleID;
-	private int holeYardsTeeID;
+	private String holeYardsTee;
 	private int holeYardsYardage;
 
 	public HoleYards() {
 		// default constructor
 		this.holeYardsCourseID = 1;
 		this.holeYardsHoleID = 0;
-		this.holeYardsTeeID = 0;
+		this.holeYardsTee = "";
 		this.holeYardsYardage = 0;
 	}
 	
-	
+
 	/**
 	 * @param holeYardsCourseID
 	 * @param holeYardsHoleID
-	 * @param holeYardsTeeID
+	 * @param holeYardsTee
 	 * @param holeYardsYardage
 	 */
-	public HoleYards(int holeyardscourseid,int holeyardsholdid,int holeyardsteeid,int holeyardsyardage) {
+	public HoleYards(int holeyardscourseid,int holeyardsholdid,String holeyardstee,int holeyardsyardage) {
 		this.holeYardsCourseID = holeyardscourseid;
 		this.holeYardsHoleID = holeyardsholdid;
-		this.holeYardsTeeID = holeyardsteeid;
+		this.holeYardsTee = holeyardstee;
 		this.holeYardsYardage = holeyardsyardage;
 	}
 
@@ -69,18 +69,18 @@ public class HoleYards {
 
 
 	/**
-	 * @return the holeYardsTeeID
+	 * @return the holeYardsTee
 	 */
-	public int getHoleYardsTeeID() {
-		return holeYardsTeeID;
+	public String getHoleYardsTee() {
+		return holeYardsTee;
 	}
 
 
 	/**
-	 * @param holeYardsTeeID the holeYardsTeeID to set
+	 * @param holeYardsTee the holeYardsTee to set
 	 */
-	public void setHoleYardsTeeID(int holeYardsTeeID) {
-		this.holeYardsTeeID = holeYardsTeeID;
+	public void setHoleYardsTee(String holeYardsTee) {
+		this.holeYardsTee = holeYardsTee;
 	}
 
 

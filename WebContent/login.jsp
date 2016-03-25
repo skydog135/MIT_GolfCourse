@@ -1,26 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<html lang='en'>
-
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-	<link rel="stylesheet" type="text/css" href="theme.css">
-	<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="theme.css">
 </head>
-
-<style>
-
-
- System.out.println ("Code is in login.jsp");
-</style>
 <body>
 	<header>
 		<img src="http://www.golfcourse.uga.edu/sites/golfcourse.uga.edu/files/2013%20UGA%20Golf%20logo.png" />
 	</header>
 	<!--UPDATE CONTENT-->
 	<div id="new-user-form">
-	<form action="LoginController.java" method="post">
-  		<p>Username:
-  		<input type="text" name="username"></p>
+	<form action="LoginController" method="post">
+  		<p>Email Address:
+  		<input type="text" name="email"></p>
   		<p>Password:
   		<input type="password" name="password"></p>
 		<div id="buttons">
@@ -29,7 +24,7 @@
 	</form>
 	<form action="index.jsp" method="post">
 		<div id="buttons">
-			<input type="button" value="Back">
+			<input type="submit" value="Back">
 		</div>
 	
 	</form> 
@@ -37,7 +32,5 @@
 	
 	<a href="forgot-password.html">Forgot Password?</a>
 	<!--END UPDATED CONTENT-->
-	
-	
 </body>
 </html>

@@ -21,8 +21,11 @@ public Connection connection;
 private ResultSet results;
 	
 	public ReadHoleQuery(String dbName, String uname, String pw){
+		//JAJ corrected url
+		/*String url  = "jdbc:mysql://jjewell@ebus2.terry.uga.edu:22/" + dbName;*/
+		System.out.println("I'm in the ReadHoleQuery dbHelper");
 		
-		String url  = "jdbc:mysql://jjewell@ebus2.terry.uga.edu:22/" + dbName;
+		String url = "jdbc:mysql://localhost:3306/" + dbName;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -35,6 +38,8 @@ private ResultSet results;
 	}
 	
 	public void doReadHole (){
+		
+		System.out.println("I'm in the ReadHoleQuery dbHelper doReadHole");
 		//set up String for query
 		String query = "select * from Hole WHERE holeCourseID=1 ORDER BY holeNumber ASC";
 		
@@ -50,7 +55,7 @@ private ResultSet results;
 	}
 	
 	public  Hole[] loadHoleSessionArray (){
-		
+		System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray");
 		//Define the array that will store each hole object
 		Hole[] holesArray = new Hole [18];
 		int i = 0;
@@ -62,18 +67,25 @@ private ResultSet results;
 			//read row by row of retrieved hole information
 				Hole hole = new Hole();
 				hole.setHoleID(this.results.getInt("holeID"));
+				System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray" + this.results.getInt("holeID"));
 				hole.setHoleCourseID(this.results.getInt("holeCourseID"));
 				hole.setHoleNumber(this.results.getInt("holeNumber"));
-				hole.setHoleBackGreenDistance(this.results.getInt("oleBackGreenDistance"));
+				System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray" + this.results.getInt("holeNumber"));
+				hole.setHoleBackGreenDistance(this.results.getInt("holeBackGreenDistance"));
 				hole.setHolePar(this.results.getInt("holePar"));
 				hole.setHoleHandicap(this.results.getInt("holeHandicap"));
 				hole.setHoleWomensPar(this.results.getInt("holeWomensPar"));
 
 				//load array to be stored as a session variable
 				holesArray[i]=hole;
+				System.out.println("The int counter is" + i);
+				System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray" + holesArray[i].getHoleID());
+				System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray" + holesArray[i].getHoleNumber());
+				System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray" + holesArray[i].getHolePar());
+				System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray" + holesArray[i].getHoleHandicap());
 				
 				//increment counter
-				i=i++;
+				i=i+1;
 			}
 				
 		} catch (SQLException e) {

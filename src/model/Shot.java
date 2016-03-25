@@ -11,8 +11,8 @@ package model;
 public class Shot {
 	private int shotID;
 	private int shotRoundHoleSummaryID;
-	private int shotClubID;
-	private int shotLocationID;
+	private String shotClub;
+	private String shotLocation;
 	private int shotNumber;
 	private int shotDistance;
 	private int shotPenaltyStroke;
@@ -22,8 +22,8 @@ public class Shot {
 		// default constructor
 		this.shotID = 0;
 		this.shotRoundHoleSummaryID = 0;
-		this.shotClubID = 0;
-		this.shotLocationID = 0;
+		this.shotClub = "";
+		this.shotLocation = "";
 		this.shotNumber = 0;
 		this.shotDistance = 0;
 		this.shotPenaltyStroke = 0;
@@ -33,18 +33,18 @@ public class Shot {
 	/**
 	 * @param shotID
 	 * @param shotRoundHoleSummaryID
-	 * @param shotClubID
-	 * @param shotLocationID
+	 * @param shotClub
+	 * @param shotLocation
 	 * @param shotNumber
 	 * @param shotDistance
 	 * @param shotPenaltyStroke
 	 * 
 	 */
-	public Shot(int shotid,int shotroundholesummaryid,int shotclubid,int shotlocationid, int shotnumber, int shotdistance, int shotpenaltystroke) {
+	public Shot(int shotid,int shotroundholesummaryid,String shotclub,String shotlocation, int shotnumber, int shotdistance, int shotpenaltystroke) {
 		this.shotID =  shotid;
 		this.shotRoundHoleSummaryID = shotroundholesummaryid;
-		this.shotClubID = shotclubid;
-		this.shotLocationID = shotlocationid;
+		this.shotClub = shotclub;
+		this.shotLocation = shotlocation;
 		this.shotNumber = shotnumber;
 		this.shotDistance = shotdistance;
 		this.shotPenaltyStroke = shotpenaltystroke;
@@ -86,32 +86,32 @@ public class Shot {
 	/**
 	 * @return the shotClubID
 	 */
-	public int getShotClubID() {
-		return shotClubID;
+	public String getShotClub() {
+		return shotClub;
 	}
 
 
 	/**
 	 * @param shotClubID the shotClubID to set
 	 */
-	public void setShotClubID(int shotClubID) {
-		this.shotClubID = shotClubID;
+	public void setShotClubID(String shotClub) {
+		this.shotClub = shotClub;
 	}
 
 
 	/**
 	 * @return the shotLocationID
 	 */
-	public int getShotLocationID() {
-		return shotLocationID;
+	public String getShotLocation() {
+		return shotLocation;
 	}
 
 
 	/**
 	 * @param shotLocationID the shotLocationID to set
 	 */
-	public void setShotLocationID(int shotLocationID) {
-		this.shotLocationID = shotLocationID;
+	public void setShotLocation(String shotLocation) {
+		this.shotLocation = shotLocation;
 	}
 
 
