@@ -13,11 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import model.CourseRating;
 import model.Hole;
-import model.HoleYards;
 import model.Shot;
 import model.User;
 import model.RoundHoleSummary;
-import dbhelpers.ReadHoleQuery;
 
 /**
  * @author jjewell_000
@@ -29,6 +27,7 @@ public class StartRoundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session; 
 	private String url;
+	private int i;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -51,8 +50,9 @@ public class StartRoundServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("I'm in the start round servlet");
 		
-		session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		
 		//******************************************************************************
@@ -60,29 +60,55 @@ public class StartRoundServlet extends HttpServlet {
 		
 		//retrieve user inputted parameters
 			String tee = request.getParameter("tee-box");
+			session.setAttribute("tee", tee);
+			System.out.println(tee);
+			
 			int numHoles = Integer.parseInt(request.getParameter("hole-amount"));
+			System.out.println(numHoles);
+			
 			int startHoleNumber = Integer.parseInt(request.getParameter("starting-hole"));
+			System.out.println("The starting hole is " + startHoleNumber);
+			
+			int currentHoleNumber = startHoleNumber;
 			int currentHoleID=0;
-		
+			
+			// TODO Auto-generated method stub
+			
 		//determine the starting hole id by searching the HolesArray
 			Hole[] holeArray = (Hole[]) session.getAttribute("holesArray");
 			boolean match = false;
-			int i=0;
-			while (!match){
+			i=0;
+			do  {
+				System.out.println("im in the startRoundServlet find hole id loop");
 				int holeArrayHoleNumber = holeArray[i].getHoleNumber();
+				System.out.println("The actual hole Number is " + startHoleNumber);
+				System.out.println("The array hole Number is " + holeArrayHoleNumber);
+				System.out.println("the counter int is " + i);
+				
 				if (holeArrayHoleNumber == startHoleNumber){
+					System.out.println("in the if statement");
+					System.out.println("the counter2 int is " + i);
+					
 					int startHoleID = holeArray[i].getHoleID();
+					System.out.println("just set the startHoleID "+ startHoleID);
+					
 					currentHoleID = startHoleID;
+					System.out.println("just set the currentHoleID "+currentHoleID);
+					
 					session.setAttribute("startHoleID", startHoleID);
 					session.setAttribute("startHoleNumber", startHoleNumber);
 					session.setAttribute("currentHoleID", currentHoleID); //at game start will be equal to starting hole
-					match = true;
-				}else {
-					i=i++;
+					session.setAttribute("currentHoleNumber", currentHoleNumber);
+					System.out.println("just set all the session attributes");
+					match=true;
 					}
-				}
+				
+				i=i+1;
+			
+				}while (match == false);
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&	
 		//calculate course handicap for golfer who has handicap on profile 
+			System.out.println("I'm in the start round servlet2 calculating golfer handicap");		
 		float courseHandicap = 0;
 		session.setAttribute("handicap",courseHandicap);
 		
@@ -91,20 +117,40 @@ public class StartRoundServlet extends HttpServlet {
 
 		if (handicapIndex >0) {
 			String gender = (user.getGender());
+			System.out.println("Gender in Start Round =" + gender);		
+			System.out.println("tee in Start Round =" + tee);	
 			
 			//Retrieve course rating information for tee, gender
-			ArrayList<CourseRating> courseRatingArrayList = (ArrayList<CourseRating>) session.getAttribute("courseRatingArrayList");
+			ArrayList<CourseRating> courseRatingArrayList = new ArrayList<CourseRating>();
+			courseRatingArrayList = ((ArrayList<CourseRating>) session.getAttribute("courseRatingArrayList"));
+	
+			System.out.println("just created the CourseRatingArryList Object" + courseRatingArrayList.size());		
 			
 			//Read through array list until a match is found
 			int counter = 0;
 			int tempCourseSlope;
 			boolean match2 = false;
 			while (!match2) {
-				CourseRating CR = new CourseRating();
-				CR = courseRatingArrayList.get(counter);
-				if ((CR.getCourseRatingGender()== gender)&& (CR.getCourseRatingTee() == tee)){
+				System.out.println("Gender in Start Round =" + gender);		
+				System.out.println("tee in Start Round =" + tee);	
+				System.out.println("in the course rating while loop");	
+				
+				//CourseRating CR = new CourseRating();
+				System.out.println("just created CR object");
+				System.out.println("counter " + counter);
+				//CR = courseRatingArrayList.get(counter);
+				
+				CourseRating CR = courseRatingArrayList.get(counter);
+				System.out.println(CR.getCourseRatingGender());	
+				System.out.println(CR.getCourseRatingTee());	
+				
+				
+				System.out.println("just retreived courseratingArrayLIst index " + counter);	
+				
+				if ((CR.getCourseRatingGender().equalsIgnoreCase(gender))&& (CR.getCourseRatingTee().equalsIgnoreCase(tee))){
 					match2 = true;
-										
+					System.out.println("gender");	
+					System.out.println("just created the CourseRatingArryList Object");	
 					//calculate course handicap based on 19, front 9 or back 9
 					if (numHoles == 18){
 						//calculate course rating based 18 holes
@@ -123,7 +169,7 @@ public class StartRoundServlet extends HttpServlet {
 						session.setAttribute("handicap",courseHandicap);
 						}
 					}
-				counter=counter++;
+				counter=counter+1;
 			}
 		}
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&	

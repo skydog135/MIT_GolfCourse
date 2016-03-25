@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+
 import model.CourseRating;
 import model.Hole;
 import model.HoleYards;
@@ -51,7 +52,7 @@ public class NewGameServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// Get session data
-		System.out.println("I'm in the new game servlet");
+		System.out.println("I'm in the new game servlet start of doPost");
 		session = request.getSession();	
 
 		//******************************************************************************
@@ -64,9 +65,13 @@ public class NewGameServlet extends HttpServlet {
 		
 			//Call the method to load the Session Hole Array
 			Hole[] holesArray = new Hole[18];
+			System.out.println("I'm in the new game servlet going into rhq.loadHoleSessionQuery");
 			holesArray = rhq.loadHoleSessionArray();
-		
+			
+			System.out.println("I'm in the new game servlet coming out of rhq.loadHoleSessionQuery");
 			session.setAttribute("holesArray", holesArray);
+			
+						
 		// This ends the section that loads the static Hole table
 		//******************************************************************************	
 		
@@ -98,8 +103,10 @@ public class NewGameServlet extends HttpServlet {
 			//Call the method to load the Gender Array List
 			ArrayList<CourseRating> courseRatingArrayList = new ArrayList<CourseRating>();
 			courseRatingArrayList = rcrq.loadCourseRatingSessionArray();
+			
+			System.out.println("just created the CourseRatingArryList Object" + courseRatingArrayList.size());
 				
-			session.setAttribute("courseRatingArraylist", courseRatingArrayList);
+			session.setAttribute("courseRatingArrayList", courseRatingArrayList);
 		// This ends the section that loads the static gender table
 		//******************************************************************************				
 							

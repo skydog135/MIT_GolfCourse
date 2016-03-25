@@ -19,22 +19,24 @@
 	</header>
 	<div id="new-user-form">
 	<!--UPDATE CONTENT -->
+	<!--UPDATE CONTENT --Julie Jewell add the "name" parameter to the select statements -->
 	<form action ="StartRound" method="post" >
 		<p>Select Number of Holes:
-  		<select id="hole-amount">
+  		<select id="hole-amount" name = "hole-amount">
 			<option>9</option>
 			<option>18</option>
 		</select></p>
 		<!--UPDATE CONTENT --Julie Jewell updated the select id to "tee-box"from "tee-box-id" -->
+
 		<p>Select Tee Box:
-  		<select id="tee-box">
+  		<select id="tee-box" name = "tee-box">
 			<option>Bulldog</option>
 			<option>Black</option>
 			<option>Red</option>
 			<option>White</option>
 		</select></p>
 		<p>Starting Hole:
-  		<select id="starting-hole">
+  		<select id="starting-hole" name = "starting-hole">
 			<option>1</option>
 			<option>10</option>
 		</select></p>

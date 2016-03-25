@@ -21,7 +21,7 @@
 			
 	</div>
 	<div id="new-user-form">
-	<form action="AddUser" method="get">
+	<form action="AddUser" method="post">
   		<p>First Name:
 		<input type="text" name="firstName"></p>
   		<p>Last Name:

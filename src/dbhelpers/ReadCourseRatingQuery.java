@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
 import model.CourseRating;
 
 
@@ -20,10 +23,12 @@ public class ReadCourseRatingQuery {
 
 public Connection connection;
 private ResultSet results;
+
 	
 	public ReadCourseRatingQuery(String dbName, String uname, String pw){
-		
-		String url  = "jdbc:mysql://jjewell@ebus2.terry.uga.edu:22/" + dbName;
+		/*JAJ Corrected URL*/
+		/*String url  = "jdbc:mysql://jjewell@ebus2.terry.uga.edu:22/" + dbName;*/
+		String url = "jdbc:mysql://localhost:3306/" + dbName;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -62,9 +67,10 @@ private ResultSet results;
 			//read row by row of retrieved club information
 				CourseRating courseRating = new CourseRating();
 				courseRating.setCourseRatingID(this.results.getInt("courseRatingID"));
-				courseRating.setCourseRatingCourseID(this.results.getInt("courseRatingCourseID"));
-				courseRating.setCourseRatingTee(this.results.getString("courseTee"));
+				courseRating.setCourseRatingTee(this.results.getString("courseRatingTee"));
+				System.out.println("CourseRatingTee = " + courseRating.getCourseRatingTee());
 				courseRating.setCourseRatingGender(this.results.getString("courseRatingGender"));
+				System.out.println("CourseRatingGender = " + courseRating.getCourseRatingGender());
 				courseRating.setCourseRating18CR(this.results.getLong("courseRating18CR"));
 				courseRating.setCourseRating18Slope(this.results.getInt("courseRating18Slope"));
 				courseRating.setCourseRatingF9CR(this.results.getLong("courseRatingF9CR"));
@@ -74,14 +80,16 @@ private ResultSet results;
 				
 				//load array list to be stored as a session variable
 				courseRatingArrayList.add(courseRating);
-
+				//System.out.println("just created the CourseRatingArryList Object" + courseRatingArrayList.size());
 			}
 				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	
+	
+		//System.out.println("just created the CourseRatingArryList Object" + courseRatingArrayList.size());
 		return courseRatingArrayList;
 
 

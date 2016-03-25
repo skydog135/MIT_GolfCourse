@@ -23,8 +23,10 @@ public Connection connection;
 private ResultSet results;
 	
 	public ReadHoleYardsQuery(String dbName, String uname, String pw){
-		
-		String url  = "jdbc:mysql://jjewell@ebus2.terry.uga.edu:22/" + dbName;
+		System.out.println("I'm in the ReadHoleYardsQuery dbHelper");
+		/*JAJ corrected URL*/
+		/*String url  = "jdbc:mysql://jjewell@ebus2.terry.uga.edu:22/" + dbName;*/
+		String url = "jdbc:mysql://localhost:3306/" + dbName;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -37,8 +39,10 @@ private ResultSet results;
 	}
 	
 	public void doReadHoleYards (){
+		
+		System.out.println("I'm in the ReadHoleYardsQuery dbHelper doReadHoleYards ");
 		//set up String for query
-		String query = "select * from HoleYards WHERE holeYardsCourseID=1 ORDER BY holeNumber ASC";
+		String query = "select * from HoleYards WHERE holeYardsCourseID=1";
 		
 		try {
 			PreparedStatement ps = this.connection.prepareStatement(query);
@@ -52,6 +56,7 @@ private ResultSet results;
 	}
 	
 	public  ArrayList<HoleYards> loadHoleSessionArray (){
+		System.out.println("I'm in the ReadHoleYardsQuery dbHelper loadHoleSessionArray ");
 		
 		//Define the array list that will store each hole tee yard object
 		ArrayList<HoleYards> holeYardsArrayList = new ArrayList<HoleYards>();
@@ -63,9 +68,14 @@ private ResultSet results;
 			//read row by row of retrieved hole yard information
 				HoleYards holeYards = new HoleYards();
 				holeYards.setHoleYardsCourseID(this.results.getInt("holeYardsCourseID"));
+				System.out.println("holeYardsCourseID = " + holeYards.getHoleYardsCourseID());
 				holeYards.setHoleYardsHoleID(this.results.getInt("holeYardsHoleID"));
-				holeYards.setHoleYardsTeeID(this.results.getInt("holeYardsTeeID"));
+				System.out.println("holeYardsHoleID = " + holeYards.getHoleYardsHoleID());
+				//JAJ 3/20 corrected tee from int to string
+				holeYards.setHoleYardsTee(this.results.getString("holeYardsTee"));
+				System.out.println("holeYardsTee = " + holeYards.getHoleYardsTee());
 				holeYards.setHoleYardsYardage(this.results.getInt("holeYardsYardage"));
+				System.out.println("holeYardsYardage = " + holeYards.getHoleYardsYardage());
 				
 				//load array list to be stored as a session variable
 				holeYardsArrayList.add(holeYards);

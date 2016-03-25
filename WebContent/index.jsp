@@ -20,7 +20,7 @@
 	<a href="http://www.golfcourse.uga.edu/">Go to UGA Golf Course Website</a>
 	<!--UPDATED CONTENT-->
 	<div id="new-user-form">
-	<form action="login1.jsp" method="post">
+	<form action="login.jsp" method="post">
 		<div id="buttons">
 		<input type="submit" value="Login">
 		</div>

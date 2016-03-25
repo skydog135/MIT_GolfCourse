@@ -9,7 +9,7 @@
 <style>
 <style>
 	body {
-	background-image: url("2.jpg");
+	background-image: <img src='images/2.jpg'/>;
 	background-color: #E0E0E0;
 	background-size: contain;
   	background-position: center;

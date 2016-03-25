@@ -19,7 +19,7 @@ import utilities.PasswordService;
  * Servlet implementation class LoginController
  * A controller for handling user authentication and login
  */
-@WebServlet(description = "A controller for handling user logins", urlPatterns = { "/login.jsp" })
+@WebServlet(description = "A controller for handling user logins", urlPatterns = { "/LoginController" })
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -78,6 +78,8 @@ public class LoginController extends HttpServlet {
 			//encrypt the password to check against what's stored in DB
 			PasswordService pws = new PasswordService();
 			String encryptedPass = pws.encrypt(password);
+			System.out.println(encryptedPass);
+			System.out.println(email);
 			
 			
 			UserDBHelper udbh = new UserDBHelper("tomcatdb","root","bu11fr0g");
@@ -93,12 +95,13 @@ public class LoginController extends HttpServlet {
 			}
 			
 			else{
+				System.out.println("in loginController username or password is incorrect");
 				String errorMessage = "Error: Unrecognized Username or Password<br>Login attempts remaining: "+(3-(loginAttempts));
 				request.setAttribute("errorMessage", errorMessage);
 
 				
 				session.setAttribute("loginAttempts", loginAttempts++);
-				url = "index.jsp";
+				url = "login.jsp";
 			}
 		}
 	
