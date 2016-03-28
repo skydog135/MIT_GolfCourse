@@ -33,6 +33,7 @@
 			<option>Bulldog</option>
 			<option>Black</option>
 			<option>Red</option>
+			<option>Silver</option>
 			<option>White</option>
 		</select></p>
 		<p>Starting Hole:

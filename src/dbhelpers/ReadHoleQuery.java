@@ -75,6 +75,9 @@ private ResultSet results;
 				hole.setHolePar(this.results.getInt("holePar"));
 				hole.setHoleHandicap(this.results.getInt("holeHandicap"));
 				hole.setHoleWomensPar(this.results.getInt("holeWomensPar"));
+				hole.setHoleLatitude(this.results.getDouble("holeLatitude"));
+				System.out.println("I'm in the ReadHoleQuery dbHelper loadHoleSessionArray" + this.results.getDouble("holeLatitude"));
+				hole.setHoleLongitude(this.results.getDouble("holeLongitude"));
 
 				//load array to be stored as a session variable
 				holesArray[i]=hole;
