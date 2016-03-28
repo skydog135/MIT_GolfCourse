@@ -15,6 +15,8 @@ public class Hole {
 	private int holePar;
 	private int holeHandicap;
 	private int holeWomensPar;
+	private double holeLatitude;
+	private double holeLongitude;
 
 	public Hole() {
 		// default constructor
@@ -25,6 +27,8 @@ public class Hole {
 		this.holePar = 0;
 		this.holeHandicap = 0;
 		this.holeWomensPar = 0;
+		this.holeLatitude=0;
+		this.holeLongitude=0;
 	}
 	
 	
@@ -38,8 +42,10 @@ public class Hole {
 	 * @param holePar
 	 * @param holeHandicap
 	 * @param holeWomensPar
+	 * @param holeLatitude
+	 * @param holeLongitude
 	 */
-	public Hole(int holeid,int courseid,int holenumber,int holebackgreendistance, int holepar, int holehandicap, int holewomenspar) {
+	public Hole(int holeid,int courseid,int holenumber,int holebackgreendistance, int holepar, int holehandicap, int holewomenspar,double holelatitude, double holelongitude) {
 		this.holeID = holeid;
 		this.holeCourseID = courseid;
 		this.holeNumber = holenumber;
@@ -47,6 +53,8 @@ public class Hole {
 		this.holePar = holepar;
 		this.holeHandicap = holehandicap;
 		this.holeWomensPar = holewomenspar;
+		this.holeLatitude=holelatitude;
+		this.holeLongitude=holelongitude;
 	}
 
 	/**
@@ -147,4 +155,32 @@ public class Hole {
 		this.holeWomensPar = holeWomensPar;
 	}
 
+	/**
+	 * @return the holeLatitude
+	 */
+	public double getHoleLatitude() {
+		return holeLatitude;
+	}
+
+	/**
+	 * @param holeLatitude the holeLatitude to set
+	 */
+	public void setHoleLatitude(double holeLatitude) {
+		this.holeLatitude = holeLatitude;
+	}
+
+	/**
+	 * @return the holeLongitude
+	 */
+	public double getHoleLongitude() {
+		return holeLongitude;
+	}
+
+	/**
+	 * @param holeLongitude the holeLongitude to set
+	 */
+	public void setHoleLongitude(double holeLongitude) {
+		this.holeLongitude = holeLongitude;
+	}
+	
 }

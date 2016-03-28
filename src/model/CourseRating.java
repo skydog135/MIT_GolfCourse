@@ -23,7 +23,7 @@ public class CourseRating {
 	public CourseRating() {
 		// default constructor
 		this.courseRatingID=0;
-		this.courseRatingCourseID=0;
+		this.courseRatingCourseID=1;
 		this.courseRatingTee="";
 		this.courseRatingGender="";
 		this.courseRating18CR=0;
