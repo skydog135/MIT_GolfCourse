@@ -18,6 +18,8 @@
 	<form action="UpdateUser" method="post">
 	<p>Email address associated with account:
   		<input type="text" name="email"></p>
+  		<p>Updated Email:
+		<input type="text" name="newEmail"></p>
   		<p>Updated First Name:
 		<input type="text" name="firstName"></p>
   		<p>Updated Last Name:

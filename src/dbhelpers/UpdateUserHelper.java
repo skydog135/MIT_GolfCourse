@@ -8,7 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import model.NewEmail;
 import model.User;
+
 
 
 /**
@@ -33,10 +35,11 @@ public Connection connection;
 	}
 	
 	
-	public void doUpdate(User user){
+	public void doUpdate(User user, NewEmail update){
+		
 		//set up String for query
 		//String query = "UPDATE Golfer (golferGender, golferPassword, golferFirstName, golferLastName, golferEmail, golferHandicapIndex, golferAvgScoreGross, golferAvgScoreNet) values (?, ?, ?, ?, ?, ?, ?, ?)";
-		String query = "UPDATE Golfer SET golferGender=?, golferPassword=?, golferFirstName=?, golferLastName=? golferhandicapIndex=? golferAvgScoreGross=? golferAvgScoreNet=? WHERE golferEmail=?";
+		String query = "UPDATE Golfer SET golferGender=?, golferPassword=?, golferFirstName=?, golferLastName=?, golferhandicapIndex=?, golferAvgScoreGross=?, golferAvgScoreNet=?, golferEmail=? WHERE golferEmail=?";
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			
@@ -47,7 +50,8 @@ public Connection connection;
 			ps.setFloat(5, user.getGolferHandicapIndex());
 			ps.setInt(6, 0);
 			ps.setInt(7, 0);
-			ps.setString(8, user.getEmail());
+			ps.setString(8, update.getNewEmail());
+			ps.setString(9, user.getEmail());
 				
 			ps.executeUpdate();
 			
