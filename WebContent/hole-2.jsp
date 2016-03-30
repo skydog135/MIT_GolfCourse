@@ -82,7 +82,7 @@ System.out.println(holeYardsArrayList.size());
 			<a href="record-details.jsp"><h5>Select Club</h5></a>
 		</div>
 		<div id="footer-button">
-			<a href="hole-summary.jsp"><h5>In the Hole!</h5></a>
+			<a href="InTheHole"><h5>In the Hole!</h5></a>
 		</div>
 	</div>
 	</footer>

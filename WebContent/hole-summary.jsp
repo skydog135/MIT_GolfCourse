@@ -23,15 +23,28 @@ input {
 	<h1>Hole Summary</h1>
 	<table>
 		<tr>
-			<td>Shots</td>
-			<td>Putts</td>
+			<td>Congratulations You Shot a</td>
+<!--        <td>Putts</td> -->
 		</tr>
 		<tr>
-			<td>3</td>
-			<td>2</td>
+			<td>${currentShotNumber}</td>
+<!--        <td>3</td> -->
+
 		</tr>
 	</table>
 	<br>
+	
+	<form action="HoleWrapUp">
+		<p>Additional Penalty Stroke(s):
+  		<select id="hole-penalty-strokes" name="hole-penalty-strokes">
+			<option>0</option>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+		</select></p>
+	
 	<div id="comments-section">
 	Comments:
 	<div id="comments">
@@ -41,6 +54,7 @@ input {
 		<input type="submit" value="Next Hole">	
 	</div>
 	</div>
+	</form> 
 	
 	
 </body>

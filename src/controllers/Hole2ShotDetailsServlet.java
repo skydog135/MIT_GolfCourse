@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 
 
+
+
 import model.CourseRating;
 import model.Hole;
 import model.HoleYards;
@@ -68,14 +70,23 @@ public class Hole2ShotDetailsServlet extends HttpServlet {
 		//retrieve user inputted parameters
 			String club = request.getParameter("club");
 			String lie = request.getParameter("lie");
-			String penaltyStrokes = request.getParameter("penalty-strokes");
+			String stringPenaltyStrokes = request.getParameter("penalty-strokes");
+			int penaltyStrokes = 0;
+			if (!stringPenaltyStrokes.equalsIgnoreCase("0")) {
+				penaltyStrokes = Integer.parseInt(stringPenaltyStrokes);
+				int currentShotNumber = (Integer) session.getAttribute("currentShotNumber");
+				currentShotNumber = currentShotNumber + penaltyStrokes;
+				session.setAttribute("currentShotNumber", currentShotNumber);
+			};
+			
+	
 		
 		System.out.println("in ShotDetailServlet:  club= " + club + "lie = " + lie);	
 			
 		//Store Shot Details in session variables
 			session.setAttribute("currentShotClub", club);
 			session.setAttribute("currentShotLie", lie);
-			session.setAttribute("penaltyStrokes", penaltyStrokes);
+			session.setAttribute("currentShotPenaltyStroke", penaltyStrokes);
 			
 		//Prepare to call the start round screen	
 			url="hole-2.jsp";

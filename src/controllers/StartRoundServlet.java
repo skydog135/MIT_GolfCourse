@@ -87,6 +87,7 @@ public class StartRoundServlet extends HttpServlet {
 			session.setAttribute("currentShotPenaltyStroke", currentShotPenaltyStroke);
 			session.setAttribute("currentShotClub", currentShotClub);
 			session.setAttribute("currentShotLie", currentShotLie);
+
 		
 			
 			// TODO Auto-generated method stub
@@ -259,6 +260,8 @@ public class StartRoundServlet extends HttpServlet {
 		
 		//set currentRounID session variable
 		session.setAttribute("currentRoundID",currentRoundID);
+		int currentRoundScore=0;
+		session.setAttribute("currentRoundScore", currentRoundScore);
 		
 		
 		//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -267,8 +270,8 @@ public class StartRoundServlet extends HttpServlet {
 		//create the hole summary Array List.  This will be added to at
 		//the end of each hole
 		System.out.println("In StartRoundServlet just about to set holeSummaryArrayList ");	
-		ArrayList<RoundHoleSummary> holeSummaryArrayList = new ArrayList<RoundHoleSummary>();
-		session.setAttribute("holeSummaryArrayList", holeSummaryArrayList);
+		ArrayList<RoundHoleSummary> roundHoleSummaryArrayList = new ArrayList<RoundHoleSummary>();
+		session.setAttribute("roundHoleSummaryArrayList", roundHoleSummaryArrayList);
 
 		//create the shot summary array list.  This will be added to at the end of each shot
 		System.out.println("In StartRoundServlet just about to set shotSummaryArrayList ");	
