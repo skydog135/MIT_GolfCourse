@@ -29,7 +29,7 @@ import dbhelpers.ReadHoleYardsQuery;
  * @author jjewell_000
  * Servlet implementation class NewGameServlet
  */
-@WebServlet(description = "This servlet does processing after the golfer hit the second shot", urlPatterns = { "/InTheHole" })
+@WebServlet(description = "This servlet does processing after the golfer presses the in the hole button", urlPatterns = { "/InTheHole" })
 public class InTheHoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session;
@@ -114,19 +114,15 @@ public class InTheHoleServlet extends HttpServlet {
 		
 			
 		//Increment currentShot Number and reset the session variable
-			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
-			currentShotNumber = currentShotNumber+1;
-			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
 			currentShotPenaltyStroke = 0;
 			currentShotClub = "";
 			currentShotLie = "";
 					
 			
 			//Reset the these session variables
-			//session.setAttribute("currentShotNumber", currentShotNumber);
-			//session.setAttribute("currentShotPenaltyStroke", currentShotPenaltyStroke);
-			//session.setAttribute("currentShotClub", currentShotClub);
-			//session.setAttribute("currentShotLie", currentShotLie);
+			session.setAttribute("currentShotPenaltyStroke", currentShotPenaltyStroke);
+			session.setAttribute("currentShotClub", currentShotClub);
+			session.setAttribute("currentShotLie", currentShotLie);
 			
 			
 		//Prepare to call the start round screen	

@@ -26,11 +26,21 @@
 			<option>3 Hybrid</option>
 			<option>5 Hybrid</option>
 			<option>7 Hybrid</option>
-			<option>2 iron</option>
-			<option>3 iron</option>
-			<option>4 iron</option>
-			<option>5 iron</option>
-			<option>6 iron</option>
+			<option>1 Iron</option>
+			<option>2 Iron</option>
+            <option>3 Iron</option>
+            <option>4 Iron</option>
+            <option>5 Iron</option>
+            <option>6 Iron</option>    
+            <option>7 Iron</option>
+            <option>8 Iron</option>
+            <option>9 Iron</option>  
+			<option>1 Iron</option>
+			<option>Pitching Wedge</option>
+            <option>Gap Wedge</option>
+            <option>Sand Wedge</option>
+            <option>Lob Wedge</option>
+            <option>Putter</option>
 		</select></p>
 		<p>Select Lie:
   		<select id="lie" name="lie">
