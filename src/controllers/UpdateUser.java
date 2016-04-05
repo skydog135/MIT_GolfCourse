@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import utilities.PasswordService;
 import model.User;
+import model.NewEmail;
 import dbhelpers.AddUser;
 import dbhelpers.UserDBHelper;
 import dbhelpers.UpdateUserHelper;
@@ -51,6 +52,7 @@ public class UpdateUser extends HttpServlet {
 		String password = request.getParameter("password");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
+		String newEmail = request.getParameter("newEmail");
 		String email = request.getParameter("email");
 
 		float handicapIndex = Float.valueOf(request.getParameter("handicap"));
@@ -61,20 +63,26 @@ public class UpdateUser extends HttpServlet {
 		String encryptedPass = pws.encrypt(password);
 
 		//Updated next line to use new default constructor to create object
+		
+		NewEmail update = new NewEmail();
+		update.setNewEmail(newEmail);
+		
 		User user = new User();
 		user.setGender(gender);
 		user.setPassword(encryptedPass);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
+	
 		//added three lines to update three new fields
 		user.setGolferHandicapIndex(handicapIndex);
 		user.setGolferAvgScoreGross(avgScoreGross);
 		user.setGolferAvgScoreNet(avgScoreNet);	
-
-		UpdateUserHelper uq = new UpdateUserHelper("tomcatdb","root","bu11fr0g");
-		uq.doUpdate(user);
-
+		
+		
+		UpdateUserHelper uq = new UpdateUserHelper("tomcatdb","root","bu11fr0g1");
+		uq.doUpdate(user, update);
+		
 		String url = "login.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request,response);
