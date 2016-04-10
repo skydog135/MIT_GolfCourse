@@ -103,16 +103,19 @@ public class Hole2Servlet extends HttpServlet {
 			}
 		
 			
-		//Increment currentShot Number and reset the session variable
-			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
+		//Increment currentShot Number and cumulative shots and reset the session variable
 			currentShotNumber = currentShotNumber+1;
 			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
+			int cumulativeShots = ((Integer) session.getAttribute("cumulativeShots") + 1);
+			//int totalCurrent9 = ((Integer) session.getAttribute("totalCurrent9") + 1);
+
 			currentShotPenaltyStroke = 0;
 			currentShotClub = "";
 			currentShotLie = "";
 			
 		//Reset the these session variables
 			session.setAttribute("currentShotNumber", currentShotNumber);
+			session.setAttribute("cumulativeShots", cumulativeShots);
 			session.setAttribute("currentShotPenaltyStroke", currentShotPenaltyStroke);
 			session.setAttribute("currentShotClub", currentShotClub);
 			session.setAttribute("currentShotLie", currentShotLie);
