@@ -63,7 +63,7 @@ p {
 	</div>
 	<table style="height: 5%;">
 		<tr>
-			<td style="width: 100%; text-align: right; padding-right: 3%">Round Date <a href="">11-02-2015</a></td>
+			<td style="width: 100%; text-align: right; padding-right: 3%">Round Date <a href="">${roundDate}</a></td>
 		</tr>
 	</table>
 	<hr>
@@ -72,35 +72,35 @@ p {
 	<table>
 		<tr>
 			<td>Total Strokes</td>
-			<td>70</td>
+			<td>${cumulativeShots}</td>
 		</tr>
 		<tr>
 			<td>Average Strokes Above Par</td>
-			<td>0</td>
+			<td>${avgStrokesAbovePar}</td>
 		</tr>
 		<tr>
 			<td>Total Bogeys</td>
-			<td>4</td>
+			<td>${totalBogeys}</td>
 		</tr>
 		<tr>
 			<td>Total Birdies</td>
-			<td>6</td>
+			<td>${totalBirdies}</td>
 		</tr>
 		<tr>
-			<td>Greens in Regulation</td>
-			<td>16</td>
-		</tr>
-		<tr>
-			<td>Fairways in Regulation</td>
-			<td>12</td>
+			<td>Total Pars</td>
+			<td>${totalPars}</td>
 		</tr>
 		<tr>
 			<td>Total Putts</td>
-			<td>27</td>
+			<td>${totalPutts}</td>
 		</tr>
 		<tr>
-			<td>Longest Drive</td>
-			<td>325 yards</td>
+			<td>Greens in Regulation</td>
+			<td>${totalGIR}</td>
+		</tr>
+		<tr>
+			<td>Fairways in Regulation</td>
+			<td>${totalFIR}</td>
 		</tr>
 	
 	</table>
@@ -109,13 +109,13 @@ p {
 	<hr>
 	<table>
 		<tr>
-			<td style="text-align: center;">Front: 34(-2)</td>
-			<td style="text-align: center;">Back: 36(+0)</td>
+			<td style="text-align: center;">Front: ${totalScoreF9}(${totalScoreF9OverUnder})</td>
+			<td style="text-align: center;">Back: ${totalScoreB9}(${totalScoreB9OverUnder})</td>
 		</tr>
 	</table>
 	<table>
 		<tr>
-			<td style="text-align: center; width: 100%;">Total: 70(-2)</td>
+			<td style="text-align: center; width: 100%;">Total: ${totalRoundScore}(${totalRoundOverUnder})</td>
 		</tr>
 	</table>
 	

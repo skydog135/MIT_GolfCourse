@@ -113,7 +113,7 @@ public class InTheHoleServlet extends HttpServlet {
 			}
 		
 			
-		//Increment currentShot Number and reset the session variable
+		//Increment reset non stroke session variables
 			currentShotPenaltyStroke = 0;
 			currentShotClub = "";
 			currentShotLie = "";

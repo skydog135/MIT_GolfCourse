@@ -39,6 +39,7 @@ public class WrapUpHoleServlet extends HttpServlet {
 	private HttpSession session;
 	private String url;
 	private int i;
+	private String roundSummaryDisp="";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -75,7 +76,7 @@ public class WrapUpHoleServlet extends HttpServlet {
 		Integer currentShotNumber = (Integer) session.getAttribute("currentShotNumber");
 		Integer numHoles = (Integer) session.getAttribute("numHoles");
 		Integer startHoleNumber = (Integer) session.getAttribute("startHoleNumber");
-		Integer currentRoundScore = (Integer) session.getAttribute("currentRoundScore");	
+		//Integer currentRoundScore = (Integer) session.getAttribute("currentRoundScore");	
 		
 		//if golfer added penalty strokes on the last screen, increment the current shot number
 		//by the user entered penalty strokes.
@@ -85,19 +86,13 @@ public class WrapUpHoleServlet extends HttpServlet {
 			currentShotNumber = currentShotNumber + holePenaltyStrokes;
 			};
 			
-		//Update currentRoundScore by adding the total number of shots to the previous
-		//currentRound score and reset session variable
-			currentRoundScore = currentRoundScore + currentShotNumber;
-			session.setAttribute("currentRoundScore", currentRoundScore);
-	
-		
 		//******************************************************************************
-		//This Section adds another entry to the HoleSummaryArrayList
+		//This Section adds another entry to the RoundHoleSummaryArrayList
 
 		//First create a RoundHoleSummary Object and load it with current shot information
 			
 			RoundHoleSummary rhs = new RoundHoleSummary();
-			rhs.setRoundHoleSummaryRoundID(0);//set to zero but will be AI when added to db
+			rhs.setRoundHoleSummaryRoundID(0);//set to zero but will be AutoIncremented when added to db
 			int currentRoundID = (Integer) session.getAttribute("currentRoundID");
 			rhs.setRoundHoleSummaryRoundID(currentRoundID);
 			rhs.setRoundHoleSummaryHoleID(currentHoleID);
@@ -112,10 +107,58 @@ public class WrapUpHoleServlet extends HttpServlet {
 			roundHoleSummaryArrayList.add(rhs);
 			session.setAttribute("roundHoleSummaryArrayList", roundHoleSummaryArrayList);
 			System.out.println("The RoundHoleSummaryArrayList has " + roundHoleSummaryArrayList.size() + " entries");
-
-		
 			
-		//If this is not the last hole, then wrap up hole and prepare for next hole
+		//*************************************************************************************************	
+
+		//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		//This section updates all of the session variables used at the end the round for the round-stats.jsp screen
+		//Update Birdie and Bogey session variables
+			int currentHolePar = (Integer)session.getAttribute("currentHolePar");
+			if (currentShotNumber < currentHolePar){//increment birdie count
+				int totalBirdies = ((Integer)session.getAttribute("totalBirdies") + 1);
+				session.setAttribute("totalBirdies",totalBirdies);	
+			} else if (currentShotNumber > currentHolePar){//increment total Bogeys
+				int totalBogeys = ((Integer)session.getAttribute("totalBogeys") + 1);
+				session.setAttribute("totalBogeys",totalBogeys);	
+			}else {//increment total Pars
+				int totalPars = ((Integer)session.getAttribute("totalPars") + 1);
+				session.setAttribute("totalPars",totalPars);	
+			}
+			
+			//increment current 9 over under, running total shots, and running total par values
+			int holeOverUnder = currentShotNumber-currentHolePar;
+			int totalCurrent9OverUnder = (((Integer)session.getAttribute("totalCurrent9OverUnder")) + holeOverUnder);
+			int totalCurrent9 = ((Integer)session.getAttribute("totalCurrent9") + currentShotNumber );
+			int totalCurrent9Par = (((Integer)session.getAttribute("totalCurrent9Par")) + currentHolePar );
+
+			
+			if ((currentHoleNumber == 9)|| (currentHoleNumber==18)) {//need to set front or back 9 session variables
+				if (currentHoleNumber == 9){
+					session.setAttribute("totalScoreF9",totalCurrent9);
+					session.setAttribute("totalScoreF9OverUnder",totalCurrent9OverUnder);
+					session.setAttribute("totalParF9",totalCurrent9Par);
+				} else {
+					session.setAttribute("totalScoreB9",totalCurrent9);
+					session.setAttribute("totalScoreB9OverUnder",totalCurrent9OverUnder);
+					session.setAttribute("totalParB9",totalCurrent9Par);					
+				}
+				
+			//reset current9 session variables to be ready for next 9 holes cumulatives
+				totalCurrent9=0;
+				totalCurrent9OverUnder = 0;
+				totalCurrent9Par = 0;
+			};
+			
+			session.setAttribute("totalCurrent9",totalCurrent9);
+			session.setAttribute("totalCurrent9OverUnder",totalCurrent9OverUnder);
+			session.setAttribute("totalCurrent9Par",totalCurrent9Par);
+			
+			//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//This section gets program set up for next hole processing, if it is not end of round
+			
+			//If this is not the last hole, then wrap up hole and prepare for next hole
 			System.out.println("I'm in the WrapUpHoleServlet and testing to see if last hole");
 			if (currentHoleNumber != endHoleNumber){//increment hole number
 				if (currentHoleNumber <18){//increment hole number by 1
@@ -123,13 +166,12 @@ public class WrapUpHoleServlet extends HttpServlet {
 				}else {//golfer is playing 18 and started on back9 and next hole will be hole 1
 					currentHoleNumber = 1;
 				}	
-			
+			//setting currentShotNumber to 1 in preparation for first shot of next hole 
 			currentShotNumber = 1;
 			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
 			int currentShotPenaltyStroke = 0;
 			String currentShotClub = "";
-			String currentShotLie = "";
-					
+			String currentShotLie = "";					
 			
 			//Reset the these session variables
 			session.setAttribute("currentShotNumber", currentShotNumber);
@@ -154,7 +196,7 @@ public class WrapUpHoleServlet extends HttpServlet {
 					System.out.println("in the if statement");
 					
 					currentHoleID = holeArray[i].getHoleID();
-					int currentHolePar = holeArray[i].getHolePar();
+					int currentHolePar2 = holeArray[i].getHolePar();
 					double currentHolePinLatitude = holeArray[i].getHoleLatitude();
 					double currentHolePinLongitude = holeArray[i].getHoleLongitude();
 					System.out.println("just set the currentHoleID "+ currentHoleID);
@@ -162,7 +204,10 @@ public class WrapUpHoleServlet extends HttpServlet {
 			
 					session.setAttribute("currentHoleID", currentHoleID); //at game start will be equal to starting hole
 					session.setAttribute("currentHoleNumber", currentHoleNumber);
-					session.setAttribute("currentHolePar", currentHolePar);
+					session.setAttribute("currentHolePar", currentHolePar2);
+					int cumulativePar = (Integer)session.getAttribute("cumulativePar");
+					cumulativePar = cumulativePar + currentHolePar2;
+					session.setAttribute("cumulativePar", cumulativePar);
 					session.setAttribute("currentHolePinLatitude", currentHolePinLatitude);
 					session.setAttribute("currentHolePinLongitude", currentHolePinLongitude);
 					
@@ -174,15 +219,26 @@ public class WrapUpHoleServlet extends HttpServlet {
 			
 				}while (match == false);
 			
-			//Prepare to call the start round screen	
+			//Prepare to call the start new hole screen	
 			url="new-hole.jsp";	
 			} 	
-
-			else if (startHoleNumber == 1) {//end of round 
-				url="round-summary-front-9.jsp";
-				} else {
-						url="round-summary-back-9.jsp";
-						}		
+			//end of round time to write shots and round array information to database tables
+			else {//end of round
+				url = "RoundWrapUp";
+				if (startHoleNumber == 1){//started on hole 1	
+				//determine what needs to be displayed in next screen
+					if (numHoles == 18 ){roundSummaryDisp="18";}
+						else {roundSummaryDisp = "F9";}
+				} else {//golfer played back 9
+					roundSummaryDisp = "B9";	
+						}
+			session.setAttribute ("roundSummaryDisp", roundSummaryDisp);
+			}
+			
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			
+			//if not end of round, prgram goes to new-hole.jsp
+			//if end of round, program goes to round wrap up servlet to write to RoundHoleSummary and Shot Tables
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);		

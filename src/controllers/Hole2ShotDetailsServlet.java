@@ -71,15 +71,58 @@ public class Hole2ShotDetailsServlet extends HttpServlet {
 			String club = request.getParameter("club");
 			String lie = request.getParameter("lie");
 			String stringPenaltyStrokes = request.getParameter("penalty-strokes");
+			int currentShotNumber = (Integer) session.getAttribute("currentShotNumber");
+			
 			int penaltyStrokes = 0;
 			if (!stringPenaltyStrokes.equalsIgnoreCase("0")) {
 				penaltyStrokes = Integer.parseInt(stringPenaltyStrokes);
-				int currentShotNumber = (Integer) session.getAttribute("currentShotNumber");
 				currentShotNumber = currentShotNumber + penaltyStrokes;
 				session.setAttribute("currentShotNumber", currentShotNumber);
+				int cumulativeShots = (Integer) session.getAttribute("cumulativeShots");
+				session.setAttribute("cumulativeShots", cumulativeShots);
 			};
 			
-	
+		//********************************************************************************
+			
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			//This section increments game stat variables, if needed
+			
+			//checking to see if we need to increment Fairway in Regulation Counter
+			if (lie.equalsIgnoreCase("Fairway") &&  currentShotNumber==2 ){//then FIR
+				int fir = ((Integer) session.getAttribute("totalFIR"))+1;
+				session.setAttribute("totalFIR",fir);
+			}
+			
+			//checking to see if we need to increment Green in Regulation Counter
+			//If par 5, GIR is on in 3
+			//If Par 4, GIR is on in 2
+			//If Par 5, GIR is on in 1
+			
+			if (lie.equalsIgnoreCase("Green")) {//then determine GIR Stroke value
+				int currentHolePar = (Integer)session.getAttribute("currentHolePar");
+				int girStrokes = 0;
+				switch (currentHolePar){
+					case 5: girStrokes = 3;
+							break;
+					case 4: girStrokes = 2;
+						break;
+					case 3: girStrokes = 1;
+						break;
+				}//end switch
+			
+				if (currentShotNumber == girStrokes){//increment GIR by 1
+					int gir = ((Integer)session.getAttribute("totalGIR")+1);
+					session.setAttribute("totalGIR",gir);
+				}
+			}//end girStrokes
+			
+			//check to see club used is a putter to increment total put count
+			if (club.equalsIgnoreCase("putter")){
+				int putts = (((Integer)session.getAttribute("totalPutts")) + 1);
+				session.setAttribute("totalPutts", putts);
+			}
+			
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		System.out.println("in ShotDetailServlet:  club= " + club + "lie = " + lie);	
 			
