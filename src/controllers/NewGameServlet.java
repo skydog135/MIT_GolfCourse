@@ -87,13 +87,13 @@ public class NewGameServlet extends HttpServlet {
 			ArrayList<HoleYards> holeYardsArrayList = new ArrayList<HoleYards>();
 			holeYardsArrayList = rhyq.loadHoleSessionArray();
 		
-			session.setAttribute("holeYardsArraylist", holeYardsArrayList);
+			session.setAttribute("holeYardsArrayList", holeYardsArrayList);
 		// This ends the section that loads the static Hole Yardage table
 		//******************************************************************************
 		
 		
 		//******************************************************************************
-			//This Section Loads the static course rating table
+			//This Section Loads the static course rating table jaj
 			// Create a ReadCourseRatingQuery helper object
 			ReadCourseRatingQuery rcrq = new ReadCourseRatingQuery("tomcatdb","root","bu11fr0g");
 				

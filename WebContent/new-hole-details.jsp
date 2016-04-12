@@ -16,9 +16,9 @@
 	<!-- Updated Content -->
 	<h1>Record Details</h1>
 	<div id="new-user-form">
-	<form>
+	<form action="ShotDetail">
 		<p>Select Club:
-  		<select id="club">
+  		<select id="club" name="club">
 			<option>Driver</option>
 			<option>3 Wood</option>
 			<option>5 Wood</option>
@@ -33,7 +33,7 @@
 			<option>6 iron</option>
 		</select></p>
 		<p>Select Lie:
-  		<select id="lie">
+  		<select id="lie" name="lie">
 			<option>Tee Box</option>
 			<option>Fairway</option>
 			<option>Rough</option>

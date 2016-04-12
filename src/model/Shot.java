@@ -14,7 +14,6 @@ public class Shot {
 	private String shotClub;
 	private String shotLocation;
 	private int shotNumber;
-	private int shotDistance;
 	private int shotPenaltyStroke;
 
 
@@ -25,7 +24,6 @@ public class Shot {
 		this.shotClub = "";
 		this.shotLocation = "";
 		this.shotNumber = 0;
-		this.shotDistance = 0;
 		this.shotPenaltyStroke = 0;
 	}
 	
@@ -36,17 +34,15 @@ public class Shot {
 	 * @param shotClub
 	 * @param shotLocation
 	 * @param shotNumber
-	 * @param shotDistance
 	 * @param shotPenaltyStroke
 	 * 
 	 */
-	public Shot(int shotid,int shotroundholesummaryid,String shotclub,String shotlocation, int shotnumber, int shotdistance, int shotpenaltystroke) {
+	public Shot(int shotid,int shotroundholesummaryid,String shotclub,String shotlocation, int shotnumber, int shotpenaltystroke) {
 		this.shotID =  shotid;
 		this.shotRoundHoleSummaryID = shotroundholesummaryid;
 		this.shotClub = shotclub;
 		this.shotLocation = shotlocation;
 		this.shotNumber = shotnumber;
-		this.shotDistance = shotdistance;
 		this.shotPenaltyStroke = shotpenaltystroke;
 	}
 
@@ -94,7 +90,7 @@ public class Shot {
 	/**
 	 * @param shotClubID the shotClubID to set
 	 */
-	public void setShotClubID(String shotClub) {
+	public void setShotClub(String shotClub) {
 		this.shotClub = shotClub;
 	}
 
@@ -128,22 +124,6 @@ public class Shot {
 	 */
 	public void setShotNumber(int shotNumber) {
 		this.shotNumber = shotNumber;
-	}
-
-
-	/**
-	 * @return the shotDistance
-	 */
-	public int getShotDistance() {
-		return shotDistance;
-	}
-
-
-	/**
-	 * @param shotDistance the shotDistance to set
-	 */
-	public void setShotDistance(int shotDistance) {
-		this.shotDistance = shotDistance;
 	}
 
 
