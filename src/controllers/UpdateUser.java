@@ -80,7 +80,7 @@ public class UpdateUser extends HttpServlet {
 		user.setGolferAvgScoreNet(avgScoreNet);	
 		
 		
-		UpdateUserHelper uq = new UpdateUserHelper("tomcatdb","root","bu11fr0g1");
+		UpdateUserHelper uq = new UpdateUserHelper("tomcatdb","root","bu11fr0g");
 		uq.doUpdate(user, update);
 		
 		String url = "login.jsp";
