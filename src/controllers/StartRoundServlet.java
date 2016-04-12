@@ -18,7 +18,11 @@ import model.Shot;
 import model.User;
 import model.RoundHoleSummary;
 import dbhelpers.AddRoundQuery;
-import dbhelpers.ReadHoleQuery;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 /**
  * @author jjewell_000
@@ -77,8 +81,24 @@ public class StartRoundServlet extends HttpServlet {
 			int currentHoleNumber = startHoleNumber;
 			int currentHoleID=0;
 			int currentShotNumber = 1;
+			int cumulativeShots = 1;
 			int endHoleNumber = 0;
 			int currentShotPenaltyStroke = 0;
+			int totalBogeys = 0;
+			int totalBirdies=0;
+			int totalFIR=0;
+			int totalGIR=0;
+			int totalPutts=0;
+			int totalPars=0;
+			int totalScoreF9=0;
+			int totalScoreF9OverUnder=0;
+			int totalParF9=0;
+			int totalScoreB9=0;
+			int totalScoreB9OverUnder=0;
+			int totalParB9=0;
+			int totalCurrent9=0;
+			int totalCurrent9OverUnder=0;
+			int totalCurrent9Par=0;
 			String currentShotClub="";
 			String currentShotLie = "";
 			
@@ -87,7 +107,24 @@ public class StartRoundServlet extends HttpServlet {
 			session.setAttribute("currentShotPenaltyStroke", currentShotPenaltyStroke);
 			session.setAttribute("currentShotClub", currentShotClub);
 			session.setAttribute("currentShotLie", currentShotLie);
-		
+			
+			//initialize round related session variables (cumulative Par is set later in this code)
+			session.setAttribute("cumulativeShots", cumulativeShots);
+			session.setAttribute("totalBogeys", totalBogeys);
+			session.setAttribute("totalBirdies", totalBirdies);
+			session.setAttribute("totalFIR", totalFIR);
+			session.setAttribute("totalGIR", totalGIR);
+			session.setAttribute("totalPutts", totalPutts);
+			session.setAttribute("totalPars", totalPars);
+			session.setAttribute("totalScoreF9", totalScoreF9);
+			session.setAttribute("totalScoreF9OverUnder", totalScoreF9OverUnder);
+			session.setAttribute("totalParF9", totalParF9);
+			session.setAttribute("totalScoreB9", totalScoreB9);
+			session.setAttribute("totalScoreB9OverUnder", totalScoreB9OverUnder);
+			session.setAttribute("totalParB9", totalParB9);
+			session.setAttribute("totalCurrent9",totalCurrent9);
+			session.setAttribute("totalCurrent9OverUnder",totalCurrent9OverUnder);
+			session.setAttribute("totalCurrent9Par",totalCurrent9Par);	
 			
 			// TODO Auto-generated method stub
 			
@@ -144,6 +181,7 @@ public class StartRoundServlet extends HttpServlet {
 					session.setAttribute("currentHoleID", currentHoleID); //at game start will be equal to starting hole
 					session.setAttribute("currentHoleNumber", currentHoleNumber);
 					session.setAttribute("currentHolePar", currentHolePar);
+					session.setAttribute("cumulativePar", currentHolePar);
 					session.setAttribute("currentHolePinLatitude", currentHolePinLatitude);
 					session.setAttribute("currentHolePinLongitude", currentHolePinLongitude);
 					
@@ -235,14 +273,22 @@ public class StartRoundServlet extends HttpServlet {
 		
 		////////////////////////////////////////////////////////////////////////////
 		//Add user round entry to round table  JAJ
-				
+		
+		//Get the current date
+			DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYY");
+		   //get current date time with Date()
+		   Date date = new Date();
+		   String dateOut = dateFormat.format(date);
+		   System.out.println(dateOut);	
+		   session.setAttribute("roundDate",dateOut);
+		   
 		//First Set the initial round obj data with the golfer ID, tee, holes to play,etc
 		Round ar = new Round();
 			ar.setRoundID(0);
 			int golferID = user.getId();
 			ar.setRoundGolferID(golferID);
 			ar.setRoundTee(tee);
-			ar.setRoundDate("MM-DD-YYYY");
+			ar.setRoundDate(dateOut);
 			ar.setRoundHolesToPlay(numHoles);
 			ar.setRoundStartingHole(startHoleNumber);
 			ar.setRoundCourseHandicap(courseHandicap);
@@ -267,8 +313,8 @@ public class StartRoundServlet extends HttpServlet {
 		//create the hole summary Array List.  This will be added to at
 		//the end of each hole
 		System.out.println("In StartRoundServlet just about to set holeSummaryArrayList ");	
-		ArrayList<RoundHoleSummary> holeSummaryArrayList = new ArrayList<RoundHoleSummary>();
-		session.setAttribute("holeSummaryArrayList", holeSummaryArrayList);
+		ArrayList<RoundHoleSummary> roundHoleSummaryArrayList = new ArrayList<RoundHoleSummary>();
+		session.setAttribute("roundHoleSummaryArrayList", roundHoleSummaryArrayList);
 
 		//create the shot summary array list.  This will be added to at the end of each shot
 		System.out.println("In StartRoundServlet just about to set shotSummaryArrayList ");	

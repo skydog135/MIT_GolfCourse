@@ -11,23 +11,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Shot;
 
+
+
+
+import model.CourseRating;
+import model.Hole;
+import model.HoleYards;
+import model.RoundHoleSummary;
+import model.Shot;
+import dbhelpers.ReadCourseRatingQuery;
+import dbhelpers.ReadHoleQuery;
+import dbhelpers.ReadHoleYardsQuery;
 
 
 /**
  * @author jjewell_000
  * Servlet implementation class NewGameServlet
  */
-@WebServlet(description = "This servlet does processing after the golfer hit the second shot", urlPatterns = { "/Hole2" })
-public class Hole2Servlet extends HttpServlet {
+@WebServlet(description = "This servlet does processing after the golfer presses the in the hole button", urlPatterns = { "/InTheHole" })
+public class InTheHoleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpSession session;
 	private String url;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Hole2Servlet() {
+    public InTheHoleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,7 +56,7 @@ public class Hole2Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// Get session data
-		System.out.println("I'm in the Hole2Servlet of doPost");
+		System.out.println("I'm in the InTheHoleServlet of doPost");
 	
 		HttpSession session = request.getSession();
 		
@@ -103,26 +113,20 @@ public class Hole2Servlet extends HttpServlet {
 			}
 		
 			
-		//Increment currentShot Number and cumulative shots and reset the session variable
-			currentShotNumber = currentShotNumber+1;
-			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
-			int cumulativeShots = ((Integer) session.getAttribute("cumulativeShots") + 1);
-			//int totalCurrent9 = ((Integer) session.getAttribute("totalCurrent9") + 1);
-
+		//Increment reset non stroke session variables
 			currentShotPenaltyStroke = 0;
 			currentShotClub = "";
 			currentShotLie = "";
+					
 			
-		//Reset the these session variables
-			session.setAttribute("currentShotNumber", currentShotNumber);
-			session.setAttribute("cumulativeShots", cumulativeShots);
+			//Reset the these session variables
 			session.setAttribute("currentShotPenaltyStroke", currentShotPenaltyStroke);
 			session.setAttribute("currentShotClub", currentShotClub);
 			session.setAttribute("currentShotLie", currentShotLie);
 			
 			
 		//Prepare to call the start round screen	
-			url="hole-2.jsp";
+			url="hole-summary.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);		
 
