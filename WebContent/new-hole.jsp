@@ -76,8 +76,13 @@ System.out.println(holeYardsArrayList.size());
 	<footer>
 	<div id="footer-nav">
 		<div id="footer-button">
+			<a href="InTheHole"><h5>In the Hole!</h5></a>
+		</div>
+		
+		<div id="footer-button">
 			<a href="new-hole-details.jsp"><h5>Select Club</h5></a>
 		</div>
+		
 		<div id="footer-button">
 			<!--  <a href="hole-2.jsp"><h5>Next Shot</h5></a>-->
 			<a href="Hole2"><h5>Next Shot</h5></a>

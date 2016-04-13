@@ -98,9 +98,10 @@ public class WrapUpRoundServlet extends HttpServlet {
 			AddRoundHoleSummaryQuery arhsq = new AddRoundHoleSummaryQuery("tomcatdb","root","bu11fr0g");
 			
 			//Write the record to the RoundHoleSummary table and store the RoundHoleSummaryID created for this hole
-			currentRoundHoleSummaryID = arhsq.doAddRoundHoleSummary(rhsArrayObject);	
-			
-			System.out.println("I'm in the WrapUpHoleServlet of doPost and just wrote a roundHoleSummary record");
+			currentRoundHoleSummaryID = arhsq.doAddRoundHoleSummary(rhsArrayObject);
+		
+			System.out.println("I'm in the WrapUpHoleServlet and just wrote a roundHoleSummary record");
+     		System.out.println("I'm in the WrapUpHoleServlet: retrieved currentRoundHoleSummaryID = " + currentRoundHoleSummaryID);
 			
              //Process through the shots for this hole if readShotArray = true.
 			//each hole will have at least one shot.
@@ -110,6 +111,13 @@ public class WrapUpRoundServlet extends HttpServlet {
 			  
 				//create temporary object to store retrieved shotSummaryArray object
 				Shot shotArrayObject = shotSummaryArrayList.get(j);
+				
+				///display shotArrayObject attributes
+	     		System.out.println("In WrapUpHoleServlet: shotArrayObject.shotRoundHoleSummaryID = " + shotArrayObject.getShotRoundHoleSummaryID());
+	     		System.out.println("In WrapUpHoleServlet: shotArrayObject.shotClub = " + shotArrayObject.getShotClub());
+	     		System.out.println("In WrapUpHoleServlet: shotArrayObject.shotLocation = " + shotArrayObject.getShotLocation());
+	     		System.out.println("In WrapUpHoleServlet: shotArrayObject.shotNumber = " + shotArrayObject.getShotNumber());
+	     		System.out.println("In WrapUpHoleServlet: shotArrayObject.shotPenaltyStroke = " + shotArrayObject.getShotPenaltyStroke());
 				
 					//when array list was loaded, the shot hole id was stored in the shotRoundSummaryID field temporarily
 					int shotHoleID = shotArrayObject.getShotRoundHoleSummaryID();
@@ -130,6 +138,7 @@ public class WrapUpRoundServlet extends HttpServlet {
 						
 						//increment shot array list counter
 						j= j+1;
+			     		System.out.println("In WrapUpHoleServlet: j = " + j);
 						
 						//check to see if you are at the end of the shotArrayList to ensure we don't error out 
 						//trying to read beyond the size of the array list
@@ -142,6 +151,7 @@ public class WrapUpRoundServlet extends HttpServlet {
 			 }// end of readShotArray = true loop
 		
 		i = i+1;
+ 		System.out.println("In WrapUpHoleServlet: i = " + i);
 		if (i >= roundHoleSummaryArrayList.size()){//the roundArrayList has hit the end
 			readRoundArray = false;
 		}

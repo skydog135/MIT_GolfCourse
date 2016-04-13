@@ -9,7 +9,7 @@
 <style>
 
 input {
-	width: 100%
+	width: 100%;
 	height: 20px;
 	border-radius: 5px;
 	background-color: #d3d3d3;
@@ -105,19 +105,28 @@ p {
 	
 	</table>
 	</div>
-	<br>
-	<hr>
-	<table>
+
+	<table style="height: 5px;">
 		<tr>
 			<td style="text-align: center;">Front: ${totalScoreF9}(${totalScoreF9OverUnder})</td>
 			<td style="text-align: center;">Back: ${totalScoreB9}(${totalScoreB9OverUnder})</td>
 		</tr>
 	</table>
-	<table>
+	<table style="height: 5px;">
 		<tr>
 			<td style="text-align: center; width: 100%;">Total: ${totalRoundScore}(${totalRoundOverUnder})</td>
 		</tr>
 	</table>
-	
+	<form action="round-summary-front-9.jsp">
+	<div id="comments-section">
+	Comments:
+	<div id="comments">
+  		<input type="text" name="comments">
+	</div>
+	<div id="buttons" style="width: 100%">
+		<input type="submit" value="End Round">	
+	</div>
+	</div>
+	</form>
 </body>
 </html>

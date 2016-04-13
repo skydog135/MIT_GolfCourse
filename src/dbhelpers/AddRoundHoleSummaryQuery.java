@@ -67,7 +67,7 @@ private int currentRoundHoleSummaryID = 0;
 			 if(rs.next())
              {
                  currentRoundHoleSummaryID = rs.getInt(1);
-         		System.out.println("I'm in the AddUser db helper:  retrieved currentRoundHoleSummaryID = " + currentRoundHoleSummaryID);
+         		System.out.println("I'm in the AddRoundHoleSummary:  retrieved currentRoundHoleSummaryID = " + currentRoundHoleSummaryID);
              }
 		
 			
