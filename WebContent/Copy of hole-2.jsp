@@ -5,25 +5,58 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="theme.css">
 	<title></title>
-	<!-- Zhenxu Add -->
-    <!-- jquery mobile -->
-    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <!-- google map api -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
-    <!-- model.js -->
-    <script src="./Distance Calcilator.js"></script>
-	<!-- The End of Zhenxu Add -->	
-	
 </head>
 <script type="text/javascript">
 	var distance = 165;
 	function updateDistance() {
 		var text = "Distance to hole: " + distance + " yards";
-		document.getElementById("gps_distance").innerHTML = text;
+		document.getElementById("yardage").innerHTML = text;
 	}	
 
-</script>
+//model logic for reset location and distance tag//
+function reset1(){
+	//restore  to default value
+$("#distance").html("");//display
+}
+
+//model logic for record location
+function record(){
+//1.get location
+//2.append location to table
+var gps = navigator.geolocation;//get gps location
+if (gps){
+  	gps.getCurrentPosition(
+  		    function(position){//when success occur
+  		    	var latitude = position.coords.latitude;//get latitude
+  		    	var longitude = position.coords.longitude;//get longitude
+
+				var loc1 = new google.maps.LatLng(33.91281+"", -83.368162+"");
+				//var loc1 = new google.maps.LatLng(session.getAttribute("currentHolePinLatitude", currentHolePinLatitude)+"", session.getAttribute("currentHolePinLongitude", currentHolePinLongitude)+"");
+				var loc2 = new google.maps.LatLng(latitude+"", longitude+"");
+				var yards = (google.maps.geometry.spherical.computeDistanceBetween(loc1,loc2))*1.09;
+				$("#distance").jsp(yards.toFixed(0) + " yards");//display
+  		     },
+             function(error){//when error occur
+                      alert("Got an error, code: " + error.code + " message: "+ error.message);
+             },
+             {maximumAge: 10000}); // max wait time 10000 ms
+        }//end if(gps)
+else {
+		alert("please open gps and try again!");//error infomation
+     }
+}
+
+//controller
+//dispatch message to model and model render view then
+function dispatcher(request){
+	if(request === "reset"){
+		reset1();
+	}
+	else if(request === "record"){
+	      record();
+	}
+}
+</script><!-- zhenxu's change -->
 
 <style>
 	body {
@@ -80,20 +113,15 @@ System.out.println(holeYardsArrayList.size());
 	</div>
 	<div id="yardage">
 		<p>${currentHoleYardage} Yards</p>
-	</div>
-	<div id="gps_distance">
 		<p id="distance"></p><!-- zhenxu's change -->
-		<p></p>
-		<button class="btn-primary" onclick="dispatcher('record')">Distance</button><!-- zhenxu's change -->
-		<input type="submit" value="Get Dist to Hole" onClick="updateDistance()" />
 	</div>
-	
+	<button class="btn-primary" onclick="dispatcher('record')">Calculate Distance</button><!-- zhenxu's change -->
 	</div>
-	<p>Total Score:  ${cumulativeShots}</p>
+	<p>Cumulative score:  ${cumulativeShots}</p>
 
-    <p>Front 9 Score: ${totalScoreF9}</p>
+    <p>Front 9 score: ${totalScoreF9}</p>
 
-	<p>Back 9 Score: ${totlaScoreB9}</p>
+	<p>Back 9 score: ${totlaScoreB9}</p>
 	<footer>
 	<div id="footer-nav">
 		<div id="footer-button">
