@@ -19,6 +19,9 @@ import javax.servlet.http.HttpSession;
 
 
 
+
+
+
 import model.CourseRating;
 import model.Hole;
 import model.HoleYards;
@@ -76,7 +79,9 @@ public class WrapUpHoleServlet extends HttpServlet {
 		Integer currentShotNumber = (Integer) session.getAttribute("currentShotNumber");
 		Integer numHoles = (Integer) session.getAttribute("numHoles");
 		Integer startHoleNumber = (Integer) session.getAttribute("startHoleNumber");
-		//Integer currentRoundScore = (Integer) session.getAttribute("currentRoundScore");	
+		String currentShotClub = (String) session.getAttribute("currentShotClub");
+		String currentShotLie = (String) session.getAttribute("currentShotLie");
+		
 		
 		//if golfer added penalty strokes on the last screen, increment the current shot number
 		//by the user entered penalty strokes.
@@ -84,6 +89,32 @@ public class WrapUpHoleServlet extends HttpServlet {
 		if (!stringHolePenaltyStrokes.equalsIgnoreCase("0")) {
 			holePenaltyStrokes = Integer.parseInt(stringHolePenaltyStrokes);
 			currentShotNumber = currentShotNumber + holePenaltyStrokes;
+			int cumulativeShots = ((Integer) session.getAttribute("cumulativeShots") + holePenaltyStrokes);
+			session.setAttribute("cumulativeShots", cumulativeShots);
+			
+			///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+			//code to add another entry to the ShotSummaryArrayList to account for penalty shots added on at the end of the hole
+			//the shotID is set to zero as it is not known at this point.
+			//the ShotRoundHoleSummaryID is temp being used to store the hole id for the shot
+		
+			//create a Shot Object and load it with current shot information
+				
+				Shot currentShot = new Shot();
+				currentShot.setShotID(0);
+				currentShot.setShotRoundHoleSummaryID(currentHoleID); //using this to temp store the holeID for this shot
+				currentShot.setShotClub(currentShotClub);
+				currentShot.setShotLocation(currentShotLie);
+				currentShot.setShotNumber(currentShotNumber);
+				currentShot.setShotPenaltyStroke(holePenaltyStrokes);
+				
+			//Create an ArrayList that stores Shot object types
+			//load the ShotSummaryArray List into that new ArrayList
+				
+				ArrayList<Shot> shotSummaryArrayList = new ArrayList<Shot>();
+				shotSummaryArrayList = ((ArrayList<Shot>) session.getAttribute("shotSummaryArrayList"));
+				System.out.println("Size of ShotSummaryArrayList after additions: " + shotSummaryArrayList.size());				
+		
+			///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM			
 			};
 			
 		//******************************************************************************
@@ -170,14 +201,14 @@ public class WrapUpHoleServlet extends HttpServlet {
 			currentShotNumber = 1;
 			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
 			int currentShotPenaltyStroke = 0;
-			String currentShotClub = "";
-			String currentShotLie = "";					
+			String currentShotClub2 = "";
+			String currentShotLie2 = "";					
 			
 			//Reset the these session variables
 			session.setAttribute("currentShotNumber", currentShotNumber);
 			session.setAttribute("currentShotPenaltyStroke", currentShotPenaltyStroke);
-			session.setAttribute("currentShotClub", currentShotClub);
-			session.setAttribute("currentShotLie", currentShotLie);
+			session.setAttribute("currentShotClub", currentShotClub2);
+			session.setAttribute("currentShotLie", currentShotLie2);
 			session.setAttribute ("currentHoleNumber", currentHoleNumber);
 			
 			//
