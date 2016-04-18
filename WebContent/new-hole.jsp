@@ -19,10 +19,7 @@
  	width: auto;
   	height: 100%;
 	}
-	
-	#footer-button {
-		width: 45%;
-	}
+
 
 </style>
 
