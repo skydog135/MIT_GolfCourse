@@ -85,12 +85,13 @@ System.out.println(holeYardsArrayList.size());
 		<p id="distance"></p><!-- zhenxu's change -->
 		<p></p>
 		<button class="btn-primary" onclick="dispatcher('record')">Distance</button><!-- zhenxu's change -->
-		<input type="submit" value="Get Dist to Hole" onClick="updateDistance()" />
+	<div id="hole_info">
 	<p>Total Score:  ${cumulativeShots}</p>
 
     <p>Front 9 Score: ${totalScoreF9}</p>
 
 	<p>Back 9 Score: ${totlaScoreB9}</p>
+	</div>
 	</div>
 	
 	</div>

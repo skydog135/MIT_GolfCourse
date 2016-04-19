@@ -29,7 +29,9 @@
 	
 	</form> 
 	</div>
-	
+	<br>
+	<br>
+	<br>
 	<a href="forgot-password.html">Forgot Password?</a>
 	<!--END UPDATED CONTENT-->
 </body>
