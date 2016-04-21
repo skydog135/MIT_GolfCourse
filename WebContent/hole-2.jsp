@@ -90,7 +90,7 @@ System.out.println(holeYardsArrayList.size());
 
     <p>Front 9 Score: ${totalScoreF9}</p>
 
-	<p>Back 9 Score: ${totlaScoreB9}</p>
+	<p>Back 9 Score: ${totalScoreB9}</p>
 	</div>
 	
 	</div>

@@ -72,6 +72,8 @@ System.out.println(holeYardsArrayList.size());
 		<p>${currentHoleYardage}</p>
 		<p>Yards</p>
 	</div>
+	<p>Total Score:  ${cumulativeShots}</p>
+	</div>
 	</div>
 	<footer>
 	<div id="footer-nav">

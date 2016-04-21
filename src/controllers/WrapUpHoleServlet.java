@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 
 
 
+
+
 import model.CourseRating;
 import model.Hole;
 import model.HoleYards;
@@ -73,6 +75,7 @@ public class WrapUpHoleServlet extends HttpServlet {
 
 		//******************************************************************************
 		//This section retrieves session variables needed later in the code
+		Integer cumulativeShots = (Integer) session.getAttribute("cumulativeShots");
 		Integer currentHoleID = (Integer) session.getAttribute("currentHoleID");
 		Integer endHoleNumber = (Integer) session.getAttribute("endHoleNumber");
 		Integer currentHoleNumber = (Integer) session.getAttribute("currentHoleNumber");
@@ -82,6 +85,12 @@ public class WrapUpHoleServlet extends HttpServlet {
 		String currentShotClub = (String) session.getAttribute("currentShotClub");
 		String currentShotLie = (String) session.getAttribute("currentShotLie");
 		
+		//Display session variables
+		System.out.println("The currentHoleID is " + currentHoleID);
+		System.out.println("The currentShotNumber is " + currentShotNumber);
+		System.out.println("The currentShotClub is " + currentShotClub);
+		System.out.println("The currentShotLie is " + currentShotLie);
+		
 		
 		//if golfer added penalty strokes on the last screen, increment the current shot number
 		//by the user entered penalty strokes.
@@ -89,8 +98,11 @@ public class WrapUpHoleServlet extends HttpServlet {
 		if (!stringHolePenaltyStrokes.equalsIgnoreCase("0")) {
 			holePenaltyStrokes = Integer.parseInt(stringHolePenaltyStrokes);
 			currentShotNumber = currentShotNumber + holePenaltyStrokes;
-			int cumulativeShots = ((Integer) session.getAttribute("cumulativeShots") + holePenaltyStrokes);
+			cumulativeShots = ((Integer) session.getAttribute("cumulativeShots") + holePenaltyStrokes);
 			session.setAttribute("cumulativeShots", cumulativeShots);
+
+			System.out.println("The cumulative shot for the hole is " + cumulativeShots);				
+			System.out.println("The PenaltyStroke for the hole is " + holePenaltyStrokes);	
 			
 			///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 			//code to add another entry to the ShotSummaryArrayList to account for penalty shots added on at the end of the hole
@@ -112,6 +124,10 @@ public class WrapUpHoleServlet extends HttpServlet {
 				
 				ArrayList<Shot> shotSummaryArrayList = new ArrayList<Shot>();
 				shotSummaryArrayList = ((ArrayList<Shot>) session.getAttribute("shotSummaryArrayList"));
+				System.out.println("Size of ShotSummaryArrayList before additions: " + shotSummaryArrayList.size());	
+				shotSummaryArrayList.add(currentShot);
+				session.setAttribute("shotSummaryArrayList", shotSummaryArrayList);
+								
 				System.out.println("Size of ShotSummaryArrayList after additions: " + shotSummaryArrayList.size());				
 		
 			///MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM			
@@ -197,7 +213,8 @@ public class WrapUpHoleServlet extends HttpServlet {
 				}else {//golfer is playing 18 and started on back9 and next hole will be hole 1
 					currentHoleNumber = 1;
 				}	
-			//setting currentShotNumber to 1 in preparation for first shot of next hole 
+			//setting currentShotNumber to 1 and incrementing cumulativeShots in preparation for first shot of next hole 
+			cumulativeShots = cumulativeShots +1;
 			currentShotNumber = 1;
 			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
 			int currentShotPenaltyStroke = 0;
@@ -210,14 +227,14 @@ public class WrapUpHoleServlet extends HttpServlet {
 			session.setAttribute("currentShotClub", currentShotClub2);
 			session.setAttribute("currentShotLie", currentShotLie2);
 			session.setAttribute ("currentHoleNumber", currentHoleNumber);
-			
+			session.setAttribute ("cumulativeShots", cumulativeShots);			
 			//
 			//determine the next hole id, par, Pin latitude, pin longitude by searching the HolesArray
 			Hole[] holeArray = (Hole[]) session.getAttribute("holesArray");
 			boolean match = false;
 			i=0;
 			do  {
-				System.out.println("im in the WrapUpRoundServlet find hole id loop");
+				System.out.println("im in the WrapUpHoleServlet find hole id loop");
 				int holeArrayHoleNumber = holeArray[i].getHoleNumber();
 				System.out.println("The actual hole Number is " + currentHoleNumber);
 				System.out.println("The array hole Number is " + holeArrayHoleNumber);
