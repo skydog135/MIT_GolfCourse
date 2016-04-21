@@ -78,9 +78,11 @@ public class Hole2ShotDetailsServlet extends HttpServlet {
 				penaltyStrokes = Integer.parseInt(stringPenaltyStrokes);
 				currentShotNumber = currentShotNumber + penaltyStrokes;
 				session.setAttribute("currentShotNumber", currentShotNumber);
-				int cumulativeShots = (Integer) session.getAttribute("cumulativeShots");
+				int cumulativeShots = ((Integer) session.getAttribute("cumulativeShots")+ penaltyStrokes);
 				session.setAttribute("cumulativeShots", cumulativeShots);
 			};
+			
+
 			
 		//********************************************************************************
 			

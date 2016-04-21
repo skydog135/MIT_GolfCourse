@@ -19,10 +19,7 @@
  	width: auto;
   	height: 100%;
 	}
-	
-	#footer-button {
-		width: 45%;
-	}
+
 
 </style>
 
@@ -71,6 +68,8 @@ System.out.println(holeYardsArrayList.size());
 	<div id="yardage">
 		<p>${currentHoleYardage}</p>
 		<p>Yards</p>
+	</div>
+	<p>Total Score:  ${cumulativeShots}</p>
 	</div>
 	</div>
 	<footer>

@@ -82,6 +82,12 @@ public class Hole2Servlet extends HttpServlet {
 			currentShot.setShotNumber(currentShotNumber);
 			currentShot.setShotPenaltyStroke(currentShotPenaltyStroke);
 			
+			System.out.println("The shot currentHoleID is " + currentShot.getShotRoundHoleSummaryID());
+			System.out.println("The currentShotNumber is " + currentShot.getShotNumber());
+			System.out.println("The currentShotPenaltyStroke is " + currentShot.getShotPenaltyStroke());
+			System.out.println("The currentShotClub is " + currentShot.getShotClub());
+			System.out.println("The currentShotLie is " + currentShot.getShotLocation());
+			
 		//Create an ArrayList that stores Shot object types
 		//load the ShotSummaryArray List into that new ArrayList
 			
