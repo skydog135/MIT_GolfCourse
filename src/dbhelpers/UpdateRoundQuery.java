@@ -61,7 +61,7 @@ private HttpSession session;
 		String query = "UPDATE Round SET golfer roundTotalGross=?, roundTotalNet=?, roundComments=? WHERE roundID=? AND roundGolferID=?";
 		System.out.println("I'm in the Update Round dbhelper inside doUpdateRound");	
 		try {
-			PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement ps = connection.prepareStatement(query);
 			
 			ps.setInt(1, cumulativeShots);
 			ps.setInt(2, (cumulativeShots-roundCourseHandicap));
