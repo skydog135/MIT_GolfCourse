@@ -117,11 +117,11 @@ p {
 			<td style="text-align: center; width: 100%;">Total: ${totalRoundScore}(${totalRoundOverUnder})</td>
 		</tr>
 	</table>
-	<form action="round-summary-front-9.jsp">
+	<form action="CloseRound">
 	<div id="comments-section">
 	Comments:
 	<div id="comments">
-  		<input type="text" name="comments">
+  		<input type="text" name="round-comments">
 	</div>
 	<div id="buttons" style="width: 100%">
 		<input type="submit" value="End Round">	
