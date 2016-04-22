@@ -101,6 +101,7 @@ public class StartRoundServlet extends HttpServlet {
 			int totalCurrent9Par=0;
 			String currentShotClub="";
 			String currentShotLie = "";
+			String roundType = "18H1S";
 			
 			//initialize current shot session variables
 			session.setAttribute("currentShotNumber", currentShotNumber);
@@ -129,15 +130,20 @@ public class StartRoundServlet extends HttpServlet {
 			// TODO Auto-generated method stub
 			
 			//Determine the last hole based on user starting hole and number of holes to play
+
 			if (startHoleNumber == 1) {
 				if (numHoles == 9)
-				    {endHoleNumber = 9;}
-				else {endHoleNumber = 18;}
+				    {endHoleNumber = 9;
+				    roundType = "9H1S";}
+				else {endHoleNumber = 18;
+						roundType = "18H1S";}
 				
 			} else if (startHoleNumber == 10) {
 				if (numHoles == 9)
-				   {endHoleNumber = 18;}
-				else {endHoleNumber = 9;}
+				   {endHoleNumber = 18;
+				   roundType = "9H10S";}
+				else {endHoleNumber = 9;
+					roundType = "18H10S";}
 				
 			} else if ((startHoleNumber > 1) && (startHoleNumber <10)){ //starting on a hole 2 - 9
 				if (numHoles == 9)//and playing 9 holes
@@ -147,6 +153,8 @@ public class StartRoundServlet extends HttpServlet {
 			} else if (numHoles == 9) {//starting on a hole 11-18 and playing 9 holes
 					   endHoleNumber = startHoleNumber -10;}//and playing 9 holes
 						else {endHoleNumber = startHoleNumber - 1;} //playing 18 holes
+			
+			session.setAttribute("roundType", roundType);
 			System.out.println("the endHole is " + endHoleNumber);
 			session.setAttribute("endHoleNumber", endHoleNumber);
 			
@@ -193,24 +201,38 @@ public class StartRoundServlet extends HttpServlet {
 			
 				}while (match == false);
 		//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&	
-		//calculate course handicap for golfer who has handicap on profile JAJ
+		//calculate course handicap for golfer who has handicap on profile JAJ and retrieve average score from previous rounds
 			System.out.println("I'm in the start round servlet2 calculating golfer handicap");		
+			
+
+		
+		//create user object
+		User user = (User) session.getAttribute("user");
+		
+		//set session variable for golfer averages (used in CloseRound)
+		session.setAttribute("avgGross", (user.getGolferAvgScoreGross()));
+		session.setAttribute ("avgNet",(user.getGolferAvgScoreGross()));
+		
+		//initialize course handicap
 		float courseHandicap = 0;
 		session.setAttribute("handicap",courseHandicap);
 		
-		User user = (User) session.getAttribute("user");
 			float handicapIndex = (user.getGolferHandicapIndex());
-
-		if (handicapIndex >0) {
+			System.out.println("I'm in the start round servlet2 handicap index calcs" + handicapIndex);
+		
+			if (handicapIndex >0) {
+			System.out.println("I'm in the start round servlet2 handicap index > 0" + handicapIndex);	
 			String gender = (user.getGender());
 			System.out.println("Gender in Start Round =" + gender);		
 			System.out.println("tee in Start Round =" + tee);
 			
 			//if golfer is female and they have chosen to play from either the Bulldog or Red Tees, we cannot
 			//calculate a handicap as there is no course rating for female/bulldog or female/red combo.
-			if (gender=="female" && ( tee.equalsIgnoreCase("Black")|| tee.equalsIgnoreCase("Bulldog")))
-			
-			{
+			if (gender=="female" && ( tee.equalsIgnoreCase("Black")|| tee.equalsIgnoreCase("Bulldog"))){
+				courseHandicap = 0;
+			}
+
+			else {
 			//Retrieve course rating information for tee, gender
 			ArrayList<CourseRating> courseRatingArrayList = new ArrayList<CourseRating>();
 			courseRatingArrayList = ((ArrayList<CourseRating>) session.getAttribute("courseRatingArrayList"));
@@ -256,8 +278,13 @@ public class StartRoundServlet extends HttpServlet {
 				
 					} else if (numHoles == 9 && startHoleNumber==1){
 						tempCourseSlope = CR.getCourseRatingF9Slope();
+						
+						System.out.println("courseSlope = " + tempCourseSlope);
+						System.out.println("handicapIndex = " + handicapIndex);
+						
 						courseHandicap = (tempCourseSlope/113)*(handicapIndex/2);
 						session.setAttribute("handicap",courseHandicap);
+						System.out.println("num holes = 9, starthole = 1, calc courseHandicap = " + courseHandicap);	
 					}
 					else {
 						tempCourseSlope = CR.getCourseRatingB9Slope();

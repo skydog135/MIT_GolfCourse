@@ -99,6 +99,7 @@ public class WrapUpHoleServlet extends HttpServlet {
 			holePenaltyStrokes = Integer.parseInt(stringHolePenaltyStrokes);
 			currentShotNumber = currentShotNumber + holePenaltyStrokes;
 			cumulativeShots = ((Integer) session.getAttribute("cumulativeShots") + holePenaltyStrokes);
+			System.out.println("I'm in the Hole2Servlet penaltystroke processing & cumulativeShots =" + cumulativeShots);
 			session.setAttribute("cumulativeShots", cumulativeShots);
 
 			System.out.println("The cumulative shot for the hole is " + cumulativeShots);				
@@ -214,9 +215,11 @@ public class WrapUpHoleServlet extends HttpServlet {
 					currentHoleNumber = 1;
 				}	
 			//setting currentShotNumber to 1 and incrementing cumulativeShots in preparation for first shot of next hole 
+			System.out.println("I'm in the WrapUpHoleServlet next hole prep before incrementing & cumulativeShots =" + cumulativeShots);
 			cumulativeShots = cumulativeShots +1;
 			currentShotNumber = 1;
-			System.out.println("I'm in the Hole2Servlet of doPost & currentShotNumber =" + currentShotNumber);
+			System.out.println("I'm in the WrapUpHoleServlet of doPost & currentShotNumber =" + currentShotNumber);
+			System.out.println("I'm in the WrapUpHoleServlet next hole prep after incrementing & cumulativeShots =" + cumulativeShots);
 			int currentShotPenaltyStroke = 0;
 			String currentShotClub2 = "";
 			String currentShotLie2 = "";					

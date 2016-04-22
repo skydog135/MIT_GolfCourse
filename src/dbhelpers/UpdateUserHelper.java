@@ -61,6 +61,27 @@ public Connection connection;
 		}
 		
 	}
+	//Added method to update golfer record at the end of a round JAJ
+	public void doUserRoundUpdate(int golferID, int avgGross, int avgNet){
+		
+		//set up String for query
+		String query = "UPDATE Golfer SET golferAvgScoreGross=?, golferAvgScoreNet=? WHERE golferID=?";
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			
+			ps.setInt(1,avgGross );
+			ps.setInt(2, avgNet);
+			ps.setInt(3, golferID);
+
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 }
 
