@@ -62,17 +62,18 @@ public class CloseRoundServlet extends HttpServlet {
 		int cumulativeShots = (Integer) session.getAttribute("cumulativeShots");
 		float courseHandicap = (Float) session.getAttribute("handicap");
 		String comments = request.getParameter("round-comments");
+		int netScore = cumulativeShots - Math.round(courseHandicap);
 		
 
 		System.out.println("In CloseRoundServlet of doPost");
-	
+		System.out.println("Course Handicap = " + courseHandicap);
 		
 		//Call UpdateRoundQuery db helper to update round record
 		// Create an UpdateRoundQuery helper object
 		UpdateRoundQuery urq = new UpdateRoundQuery("tomcatdb","root","bu11fr0g");
 		
 		//Update the round record in the round table
-		urq.doUpdateRound(golferID, roundID, cumulativeShots, courseHandicap, comments);
+		urq.doUpdateRound(golferID, roundID, cumulativeShots, netScore, comments);
 		
 		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		
@@ -88,10 +89,10 @@ public class CloseRoundServlet extends HttpServlet {
 		//and no need to calculate an updated average
 		if (avgGrossScore == 0) {
 			avgGrossScore = cumulativeShots;
-			avgNetScore = (cumulativeShots - Math.round(courseHandicap));
+			avgNetScore = netScore;
 		}else {
 			avgGrossScore = (avgGrossScore + cumulativeShots)/2;
-			avgNetScore = ((avgNetScore + (cumulativeShots - Math.round(courseHandicap)))/2);
+			avgNetScore = ((avgNetScore + netScore)/2);
 		};
 		
 		// Update golfer record with new average scores
