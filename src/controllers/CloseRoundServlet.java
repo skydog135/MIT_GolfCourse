@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import model.RoundHoleSummary;
 import model.Shot;
 import model.User;
+import dbhelpers.ReadHoleSummaryQuery;
 import dbhelpers.UpdateRoundQuery;
 import dbhelpers.UpdateUserHelper;
 
@@ -102,7 +103,14 @@ public class CloseRoundServlet extends HttpServlet {
 		//*************************************************************************
 		
 		//######################################################################
-		//Call the servlet that will determine which screen to display next and do table retrieval prep
+		//Load the table to display the round hole by hole stats
+		// Create a ReadHoleSummaryQuery helper object
+		ReadHoleSummaryQuery rhs = new ReadHoleSummaryQuery("tomcatdb","root","bu11fr0g");
+		
+		// Get the html table from the ReadHoleSummaryQuery object
+		String tee = (String) session.getAttribute("tee");
+		rhs.doReadHoleSummary(tee, roundID);
+		String table = rhs.getHTMLTable();
 		
 
 		

@@ -135,8 +135,7 @@ public class StartRoundServlet extends HttpServlet {
 				if (numHoles == 9)
 				    {endHoleNumber = 9;
 				    roundType = "9H1S";}
-				else {endHoleNumber = 18;
-						roundType = "18H1S";}
+				else {endHoleNumber = 18;}
 				
 			} else if (startHoleNumber == 10) {
 				if (numHoles == 9)
@@ -147,11 +146,13 @@ public class StartRoundServlet extends HttpServlet {
 				
 			} else if ((startHoleNumber > 1) && (startHoleNumber <10)){ //starting on a hole 2 - 9
 				if (numHoles == 9)//and playing 9 holes
-				    {endHoleNumber = startHoleNumber + 8;}
+				    {endHoleNumber = startHoleNumber + 8;
+				    roundType = "9H2-9S";}
 				else {endHoleNumber = startHoleNumber - 1;}//and playing 18 holes
 				
 			} else if (numHoles == 9) {//starting on a hole 11-18 and playing 9 holes
-					   endHoleNumber = startHoleNumber -10;}//and playing 9 holes
+					   endHoleNumber = startHoleNumber -10;
+					   roundType = "9H11-18S";}//and playing 9 holes
 						else {endHoleNumber = startHoleNumber - 1;} //playing 18 holes
 			
 			session.setAttribute("roundType", roundType);
