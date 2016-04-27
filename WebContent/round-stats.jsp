@@ -57,9 +57,6 @@ p {
 	
 	<div id="round-history-header">
 		<p>Round Stats</p>
-		<div id="buttons">
-			<input type="submit" value="Done">	
-		</div>	
 	</div>
 	<table style="height: 5%;">
 		<tr>

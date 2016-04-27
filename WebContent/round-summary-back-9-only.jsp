@@ -89,7 +89,6 @@ tr, td {
 		</tr>
 		
 	</table>
-	<a href="round-summary-front-9.jsp"><span style="color:grey">Front 9</span></a> | Back 9
 	<div id="comments-section">
 	<div id="buttons">
 	<form action="new-round.jsp">
