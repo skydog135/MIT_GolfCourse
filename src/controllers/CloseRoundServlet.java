@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.DisplayRound;
+import model.Hole;
 import model.RoundHoleSummary;
 import model.Shot;
 import model.User;
+import model.DisplayRound;
 import dbhelpers.ReadHoleSummaryQuery;
 import dbhelpers.UpdateRoundQuery;
 import dbhelpers.UpdateUserHelper;
@@ -100,22 +103,42 @@ public class CloseRoundServlet extends HttpServlet {
 		UpdateUserHelper uq = new UpdateUserHelper("tomcatdb","root","bu11fr0g");
 		uq.doUserRoundUpdate(golferID, avgGrossScore, avgNetScore);
 		
+		System.out.println("In the CloseRoundServlet of doPost just updated the round record");
+		
 		//*************************************************************************
 		
 		//######################################################################
 		//Load the table to display the round hole by hole stats
 		// Create a ReadHoleSummaryQuery helper object
+		System.out.println("In the CloseRoundServlet of doPost getting ready to build 9 hole summary tables");
+		
 		ReadHoleSummaryQuery rhs = new ReadHoleSummaryQuery("tomcatdb","root","bu11fr0g");
 		
 		// Get the html table from the ReadHoleSummaryQuery object
 		String tee = (String) session.getAttribute("tee");
-		rhs.doReadHoleSummary(tee, roundID);
-		String table = rhs.getHTMLTable();
+		int numHoles = (Integer) session.getAttribute("numHoles");
 		
+		rhs.doReadHoleSummary(tee, roundID);
+		
+		//If golfer played 9 holes, then we only need to load one table with 9 records
+		//for display
+		if (numHoles == 9){//golfer played 9 holes
+			String table = rhs.getHTMLTable();
+			System.out.println(table);
+			url="JAJ-round-summary-9-only.jsp";
+			session.setAttribute("9OnlyTable", table);
+			
+		} else {//golfer played 18 and we need to format two tables
+			String[] F9B9TableArray = new String[2];
+			F9B9TableArray = rhs.getHTML18Table();
+			session.setAttribute("F9Table",F9B9TableArray[0]);
+			session.setAttribute("B9Table",F9B9TableArray[1]);	
+			url="JAJ-round-summary-front-9.jsp";
+		}
 
 		
-		System.out.println("In the CloseRoundServlet of doPost just updated the round record");
-		url= "round-summary-front-9.jsp";
+		System.out.println("In the CloseRoundServlet of doPost just created the display 9 hole tables");
+
 		
 
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
