@@ -15,9 +15,6 @@
 <body>
 	<div id="profile-edit-toolbar">
 		<div id="profile-edit-content">
-			<a href="edit-password.jsp">Change<br>Password</a>
-		</div>
-		<div id="profile-edit-content">
 			<a href="edit-profile.jsp">Change<br>Profile</a>
 		</div>
 		<div id="profile-edit-content">

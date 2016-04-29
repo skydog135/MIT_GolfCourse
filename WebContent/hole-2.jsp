@@ -35,6 +35,75 @@
  	width: auto;
   	height: 100%;
 	}
+	
+	p {
+      font-size: 34px;
+    }
+    
+    a {
+      font-size: 34px;
+    }
+    
+    @media (max-width: 1200px) {
+      p {
+        font-size: 30px;
+      }
+      
+      a {
+        font-size: 30px;
+      }
+      
+    }
+    
+
+    @media (max-width: 1000px) {
+      p {
+        font-size: 24px;
+      }
+      
+      a {
+        font-size: 24px;
+      }
+      
+    }
+
+    @media (max-width: 800px) {
+      p {
+        font-size: 18px;
+      }
+      
+      a {
+        font-size: 18px;
+      }
+      
+    }
+
+    @media (max-width: 600px) {
+      p {
+        font-size: 18px;
+      }
+      
+      a {
+        font-size: 18px;
+      }
+      
+    }
+
+    @media (max-width: 400px) {
+      p {
+        font-size: 16px;
+      }
+      
+      a {
+        font-size: 16px;
+      }
+    }
+    
+    span {
+    	font-weight: bold;
+    }
+    <!--following code is used to making sure above code can work in moble devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 </style>
 <body background="images/${currentHoleNumber}.jpg">	
@@ -66,15 +135,15 @@ System.out.println(holeYardsArrayList.size());
 	<div id="sidebar">
 	<div id="hole_info">
 		<div id="hole_number">
-			<h1>Hole</h1>
+			<span><p>Hole</p></span>
 			<p>${currentHoleNumber}</p>
 		</div>
 		<div id="par">
-			<h1>Par</h1>
+			<span><p>Par</p></span>
 			<p>${currentHolePar}</p>
 		</div>
 		<div id="result">
-			<h1>Stroke</h1>
+			<span><p>Stroke</p></span>
 			<p>${currentShotNumber}</p>
 		</div>
 	</div>
