@@ -76,11 +76,11 @@ p {
 			<td>${avgStrokesAbovePar}</td>
 		</tr>
 		<tr>
-			<td>Total Bogeys</td>
+			<td>Total Holes Over Par</td>
 			<td>${totalBogeys}</td>
 		</tr>
 		<tr>
-			<td>Total Birdies</td>
+			<td>Total Holes Under Par</td>
 			<td>${totalBirdies}</td>
 		</tr>
 		<tr>
@@ -114,7 +114,7 @@ p {
 			<td style="text-align: center; width: 100%;">Total: ${totalRoundScore}(${totalRoundOverUnder})</td>
 		</tr>
 	</table>
-	<form action="CloseRound">
+	<form action="CloseRound" method = 'post'>
 	<div id="comments-section">
 	Comments:
 	<div id="comments">

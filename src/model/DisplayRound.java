@@ -17,6 +17,7 @@ public class DisplayRound {
 	private int displayRoundHoleYardage;
 	private int displayRoundHoleGross;
 	private int displayRoundHoleSummaryID;
+	private String displayRoundHoleSummaryComments;
 
 
 	public DisplayRound() {
@@ -29,6 +30,7 @@ public class DisplayRound {
 		this.displayRoundHoleYardage = 0;
 		this.displayRoundHoleGross = 0;
 		this.displayRoundHoleSummaryID = 0;
+		this.displayRoundHoleSummaryComments="";
 	}
 	
 	
@@ -39,7 +41,7 @@ public class DisplayRound {
 	 * @param roundHoleSummaryGross
 	 * @param roundHoleSummaryComments
 	 */
-	public DisplayRound(int holeid,int holenumber,int holepar,int holehandicap, String tee, int holeyardage, int holegross, int holesummaryID) {
+	public DisplayRound(int holeid,int holenumber,int holepar,int holehandicap, String tee, int holeyardage, int holegross, int holesummaryID, String holesummarycomments) {
 		this.displayRoundHoleID = holeid;
 		this.displayRoundHoleNumber = holenumber;
 		this.displayRoundHolePar = holepar;
@@ -48,6 +50,7 @@ public class DisplayRound {
 		this.displayRoundHoleYardage = holeyardage;
 		this.displayRoundHoleGross = holegross;
 		this.displayRoundHoleSummaryID = holesummaryID;
+		this.displayRoundHoleSummaryComments = holesummarycomments;
 	}
 
 
@@ -178,7 +181,20 @@ public class DisplayRound {
 		this.displayRoundHoleSummaryID = displayRoundHoleSummaryID;
 	}
 	
-	
+	/**
+	 * @return the displayRoundHoleSummaryComments
+	 */
+	public String getDisplayRoundHoleSummaryComments() {
+		return displayRoundHoleSummaryComments;
+	}
+
+
+	/**
+	 * @param displayTee the displayTee to set
+	 */
+	public void setDisplayRoundHoleSummaryComments(String displayRoundHoleSummaryComments) {
+		this.displayRoundHoleSummaryComments = displayRoundHoleSummaryComments;
+	}	
 }
 
 
