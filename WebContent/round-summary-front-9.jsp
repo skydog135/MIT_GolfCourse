@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+	
+    <% String table = (String) session.getAttribute("F9Table");
+    System.out.println("table String is: " + table);
+    %>	
+	
 <html lang='en'>
 
 <head>
@@ -17,79 +24,7 @@ tr, td {
 <body>
 	<h1>Round Summary</h1>
 	<h4>Front Nine</h4>
-	<table>
-		<tr>
-			<td>Hole</td>
-			<td>Yardage</td>
-			<td>Par</td>
-			<td># of Shots</td>
-			<td>Handicap</td>
-		</tr>
-		<tr>
-			<td><a href="">1</a></td>
-			<td>510</td>
-			<td>5</td>
-			<td>4</td>
-			<td>11</td>
-		</tr>
-		<tr>
-			<td><a href="">2</a></td>
-			<td>425</td>
-			<td>3</td>
-			<td>5</td>
-			<td>13</td>
-		</tr>
-		<tr>
-			<td><a href="">3</a></td>
-			<td>210</td>
-			<td>4</td>
-			<td>3</td>
-			<td>5</td>
-		</tr>
-		<tr>
-			<td><a href="">4</a></td>
-			<td>455</td>
-			<td>4</td>
-			<td>4</td>
-			<td>9</td>
-		</tr>
-		<tr>
-			<td><a href="">5</a></td>
-			<td>505</td>
-			<td>4</td>
-			<td>5</td>
-			<td>15</td>
-		</tr>
-		<tr>
-			<td><a href="">6</a></td>
-			<td>434</td>
-			<td>4</td>
-			<td>4</td>
-			<td>3</td>
-		</tr>
-		<tr>
-			<td><a href="">7</a></td>
-			<td>159</td>
-			<td>3</td>
-			<td>3</td>
-			<td>17</td>
-		</tr>
-		<tr>
-			<td><a href="">8</a></td>
-			<td>430</td>
-			<td>4</td>
-			<td>4</td>
-			<td>1</td>
-		</tr>
-		<tr>
-			<td><a href="">9</a></td>
-			<td>495</td>
-			<td>4</td>
-			<td>5</td>
-			<td>7</td>
-		</tr>
-		
-	</table>
+	<%= table %>
 	Front 9 | <a href="round-summary-back-9.jsp"><span style="color:grey">Back 9</span></a>
 	<div id="comments-section">
 

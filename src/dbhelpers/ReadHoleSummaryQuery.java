@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import model.DisplayRound;
 
 /**
@@ -40,7 +41,7 @@ private ResultSet results;
 		
 		System.out.println("I'm in the ReadHoleSummary dbHelper doReadHoleSummary");
 		//set up String for query
-		String query = "select holeID, holeNumber, holePar, holeHandicap, holeYardsTee, holeYardsYardage, roundHoleSummaryGross, roundHoleSummaryID from hole h JOIN holeYards hy ON h.holeID=hy.holeYardsHoleID JOIN roundholesummary rhs ON hy.holeYardsHoleID = rhs.roundHoleSummaryHoleID WHERE hy.holeYardsTee=? AND rhs.roundHoleSummaryRoundID=? ORDER BY holeNumber ASC";
+		String query = "select holeID, holeNumber, holePar, holeHandicap, holeYardsTee, holeYardsYardage, roundHoleSummaryGross, roundHoleSummaryID, roundHoleSummaryComments from hole h JOIN holeYards hy ON h.holeID=hy.holeYardsHoleID JOIN roundholesummary rhs ON hy.holeYardsHoleID = rhs.roundHoleSummaryHoleID WHERE hy.holeYardsTee=? AND rhs.roundHoleSummaryRoundID=? ORDER BY holeNumber ASC";
 		
 		try {
 			PreparedStatement ps = this.connection.prepareStatement(query);
@@ -81,6 +82,9 @@ private ResultSet results;
 			table +="</td>";
 			table +="</tr>";
 			
+			this.results.beforeFirst();
+			System.out.println("Just set hole result set point to before first");
+			
 			while(this.results.next()){
 				DisplayRound dr = new DisplayRound();
 				dr.setDisplayRoundHoleID(this.results.getInt("holeID"));
@@ -91,6 +95,8 @@ private ResultSet results;
 				dr.setDisplayRoundHoleYardage(this.results.getInt("holeYardsYardage"));
 				dr.setDisplayRoundHoleGross(this.results.getInt("roundHoleSummaryGross"));
 				dr.setDisplayRoundHoleSummaryID(this.results.getInt("roundHoleSummaryID"));
+				dr.setDisplayRoundHoleSummaryComments(this.results.getString("roundHoleSummaryComments"));
+				System.out.println("Hole Comments = " + this.results.getString("roundHoleSummaryComments"));
 			
 				table +="<tr>";
 				table +="<td>";
@@ -109,9 +115,11 @@ private ResultSet results;
 				table += dr.getDisplayRoundHoleHandicap();
 				table +="</td>";
 				table +="<td>";
-				table += "<form action='displayShotDetail' method = 'post'>" +
+				table += "<form action='DisplayShotDetails' method = 'post'>" +
 						"<input type='hidden' name='roundHoleSummaryID' value='" + dr.getDisplayRoundHoleSummaryID()+ "'>" +
-						"<input type='submit' value='Details'>" +
+						"<input type='hidden' name='holeNum' value='" + dr.getDisplayRoundHoleNumber()+ "'>" +
+						"<input type='hidden' name='holeCom' value='" + dr.getDisplayRoundHoleSummaryComments()+ "'>" +
+						"<input type='submit' value='+'>" +
 						"</form>";
 				table +="</td>";		
 				table +="</tr>";
@@ -162,6 +170,9 @@ private ResultSet results;
 			tableF9 +="</td>";
 			tableF9 +="</tr>";
 			
+			this.results.beforeFirst();
+			System.out.println("Just set hole result set point to before first");
+			
 			while (holeCounter < 10){//load the F9 table rows
 			
 				if(this.results.next()){
@@ -174,6 +185,8 @@ private ResultSet results;
 					dr.setDisplayRoundHoleYardage(this.results.getInt("holeYardsYardage"));
 					dr.setDisplayRoundHoleGross(this.results.getInt("roundHoleSummaryGross"));
 					dr.setDisplayRoundHoleSummaryID(this.results.getInt("roundHoleSummaryID"));
+					dr.setDisplayRoundHoleSummaryComments(this.results.getString("roundHoleSummaryComments"));
+					System.out.println("Hole Comments = " + this.results.getString("roundHoleSummaryComments"));
 				
 					tableF9 +="<tr>";
 					tableF9 +="<td>";
@@ -192,8 +205,10 @@ private ResultSet results;
 					tableF9 += dr.getDisplayRoundHoleHandicap();
 					tableF9 +="</td>";
 					tableF9 +="<td>";
-					tableF9 += "<form action='displyShotDetail' method = 'post'>" +
+					tableF9 += "<form action='DisplayShotDetails' method = 'post'>" +
 							"<input type='hidden' name='roundHoleSummaryID' value='" + dr.getDisplayRoundHoleSummaryID()+ "'>" +
+							"<input type='hidden' name='holeNum' value='" + dr.getDisplayRoundHoleNumber()+ "'>" +
+							"<input type='hidden' name='holeCom' value='" + dr.getDisplayRoundHoleSummaryComments()+ "'>" +
 							"<input type='submit' value='Details'>" +
 							"</form>";
 					tableF9 +="</td>";		
@@ -240,7 +255,7 @@ private ResultSet results;
 					tableB9 += "Detail";
 					tableB9 +="</td>";
 					tableB9 +="</tr>";
-					
+										
 					while (holeCounter < 18){//load the B9 table rows
 					
 						if(this.results.next()){
@@ -253,30 +268,34 @@ private ResultSet results;
 							dr.setDisplayRoundHoleYardage(this.results.getInt("holeYardsYardage"));
 							dr.setDisplayRoundHoleGross(this.results.getInt("roundHoleSummaryGross"));
 							dr.setDisplayRoundHoleSummaryID(this.results.getInt("roundHoleSummaryID"));
+							dr.setDisplayRoundHoleSummaryComments(this.results.getString("roundHoleSummaryComments"));
+							System.out.println("Hole Comments = " + this.results.getString("roundHoleSummaryComments"));
 						
-							tableF9 +="<tr>";
-							tableF9 +="<td>";
-							tableF9 += dr.getDisplayRoundHoleNumber();
-							tableF9 +="</td>";
-							tableF9 +="<td>";
-							tableF9 += dr.getDisplayRoundHoleYardage();
-							tableF9 +="</td>";
-							tableF9 +="<td>";
-							tableF9 += dr.getDisplayRoundHolePar();
-							tableF9 +="</td>";
-							tableF9 +="<td>";
-							tableF9 += dr.getDisplayRoundHoleGross();
-							tableF9 +="</td>";
-							tableF9 +="<td>";
-							tableF9 += dr.getDisplayRoundHoleHandicap();
-							tableF9 +="</td>";
-							tableF9 +="<td>";
-							tableF9 += "<form action='shotDetail' method = 'post'>" +
+							tableB9 +="<tr>";
+							tableB9 +="<td>";
+							tableB9 += dr.getDisplayRoundHoleNumber();
+							tableB9 +="</td>";
+							tableB9 +="<td>";
+							tableB9 += dr.getDisplayRoundHoleYardage();
+							tableB9 +="</td>";
+							tableB9 +="<td>";
+							tableB9 += dr.getDisplayRoundHolePar();
+							tableB9 +="</td>";
+							tableB9 +="<td>";
+							tableB9 += dr.getDisplayRoundHoleGross();
+							tableB9 +="</td>";
+							tableB9 +="<td>";
+							tableB9 += dr.getDisplayRoundHoleHandicap();
+							tableB9 +="</td>";
+							tableB9 +="<td>";
+							tableB9 += "<form action='DisplayShotDetails' method = 'post'>" +
 									"<input type='hidden' name='roundHoleSummaryID' value='" + dr.getDisplayRoundHoleSummaryID()+ "'>" +
+									"<input type='hidden' name='holeNum' value='" + dr.getDisplayRoundHoleNumber()+ "'>" +
+									"<input type='hidden' name='holeCom' value='" + dr.getDisplayRoundHoleSummaryComments()+ "'>" +
 									"<input type='submit' value='Details'>" +
 									"</form>";
-							tableF9 +="</td>";		
-							tableF9 +="</tr>";
+							tableB9 +="</td>";		
+							tableB9 +="</tr>";
 						}
 					//increment hole counter; will only process holes 10 - 18 for first table	
 					holeCounter = holeCounter +1;
@@ -286,7 +305,7 @@ private ResultSet results;
 					e.printStackTrace();
 				}
 				
-				tableF9 += "</table>";
+				tableB9 += "</table>";
 				F9B9TableArray[1]= tableB9;
 				System.out.println(tableB9);
 

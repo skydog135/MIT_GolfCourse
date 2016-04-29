@@ -22,7 +22,7 @@ public class RoundHoleSummary {
 		this.roundHoleSummaryRoundID = 0;
 		this.roundHoleSummaryHoleID = 0;
 		this.roundHoleSummaryGross = 0;
-		this.roundHoleSummaryComments = "";
+		this.roundHoleSummaryComments = "   ";
 	}
 	
 	

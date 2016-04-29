@@ -45,7 +45,7 @@ public class Round {
 		this.roundCourseHandicap = 0;
 		this.roundTotalGross = 0;
 		this.roundTotalNet = 0;
-		this.roundComments = "";	
+		this.roundComments = "    ";	
 	}
 	
 	public Round(int roundID, int roundGolferID, String roundTee,

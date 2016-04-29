@@ -3,39 +3,40 @@
 	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 	
-    <% String table = (String) session.getAttribute("9OnlyTable");
+    <% String table = (String) session.getAttribute("shotDetailTable");
     System.out.println("table String is: " + table);
-    %>
-    
-
+    %>	
+	
 <html lang='en'>
-
 
 <head>
 	<link rel="stylesheet" type="text/css" href="theme.css">
 	<title></title>
+	<script>
+	function goBack(){
+		window.history.back()
+	}
+	
+	</script>
 </head>
-
 <style>
 
 tr, td {
 	width: 20%;
 }
 
-</style>
 
+</style>
 <body>
+	<h1>Hole ${holeNum}</h1>
+	<h4>Summary </h4>
 	<%= table %>
-	<br />
-	Front 9 | <a href="round-summary-back-9.jsp"><span style="color:grey">Back 9</span></a>
 	<div id="comments-section">
-	<div id="comments"> 
-		<h4>Comments</h4>
-		<input type="text"></input><br>
-	</div>
-	<br>
+	${holeCom}
 	<div id="buttons">
-		<input type="submit" value="Done"></input>
+	
+	<button onclick="goBack()">Back</button>
+	
 	</div>
 	</div>
 	

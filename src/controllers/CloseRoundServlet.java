@@ -1,7 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.DisplayRound;
-import model.Hole;
-import model.RoundHoleSummary;
-import model.Shot;
 import model.User;
-import model.DisplayRound;
 import dbhelpers.ReadHoleSummaryQuery;
 import dbhelpers.UpdateRoundQuery;
 import dbhelpers.UpdateUserHelper;
@@ -125,18 +119,19 @@ public class CloseRoundServlet extends HttpServlet {
 		if (numHoles == 9){//golfer played 9 holes
 			String table = rhs.getHTMLTable();
 			System.out.println(table);
-			url="JAJ-round-summary-9-only.jsp";
 			session.setAttribute("9OnlyTable", table);
+			url="round-summary-front-9-only.jsp";
+
 			
 		} else {//golfer played 18 and we need to format two tables
 			String[] F9B9TableArray = new String[2];
 			F9B9TableArray = rhs.getHTML18Table();
 			session.setAttribute("F9Table",F9B9TableArray[0]);
 			session.setAttribute("B9Table",F9B9TableArray[1]);	
-			url="JAJ-round-summary-front-9.jsp";
+			url="round-summary-front-9.jsp";
+			
 		}
 
-		
 		System.out.println("In the CloseRoundServlet of doPost just created the display 9 hole tables");
 
 		
