@@ -1,38 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+	pageEncoding="ISO-8859-1"%>
+<html lang='en'>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="theme.css">
+	<link rel="stylesheet" type="text/css" href="theme.css">
+	<title></title>
 </head>
+<style>
+	a {
+		margin-top: 10px;
+	}
+
+</style>
 <body>
 	<header>
 		<img src="http://www.golfcourse.uga.edu/sites/golfcourse.uga.edu/files/2013%20UGA%20Golf%20logo.png" />
 	</header>
-	<!--UPDATE CONTENT-->
+	<!-- Updated Content -->
 	<div id="new-user-form">
 	<form action="LoginController" method="post">
-  		<p>Email Address:
-  		<input type="text" name="email"></p>
+  		<p>Email:
+		<input type="text" name="email"></p>
   		<p>Password:
   		<input type="password" name="password"></p>
 		<div id="buttons">
+		<br>
+		<br>
 		<input type="submit" value="Log In">
 		</div>
 	</form>
-	<form action="index.jsp" method="post">
+	<form action="index.jsp">
 		<div id="buttons">
-			<input type="submit" value="Back">
+		<input type="submit" value="Back">
 		</div>
-	
 	</form> 
-	</div>
-	<br>
-	<br>
-	<br>
 	<a href="forgot-password.html">Forgot Password?</a>
-	<!--END UPDATED CONTENT-->
+	<!-- End Updated Content -->
+	</div>
+
+	
+	
 </body>
 </html>
