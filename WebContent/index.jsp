@@ -8,7 +8,9 @@
 </head>
 
 <style>
-
+	#new-user-form {
+		height: 25%;
+	}
 
 </style>
 
@@ -29,8 +31,12 @@
 		<div id="buttons">
 		<input type="submit" value="New User">
 		</div>
+		
 	</form> 
+	
 	</div>
+	
+	<a href="faq.jsp">Frequently Asked Questions</a>
 	<!--END UPDATED CONTENT-->
 	<!--Julie's test updates-->
 	
