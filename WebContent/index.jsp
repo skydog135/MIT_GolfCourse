@@ -11,6 +11,10 @@
 	#new-user-form {
 		height: 25%;
 	}
+	
+	form {
+		margin-top: 10%;
+	}
 
 </style>
 

@@ -8,7 +8,9 @@
 </head>
 
 <style>
-
+	#new-user-form {
+		margin-top: 10%;
+	}
 
 </style>
 
@@ -18,7 +20,7 @@
 			<a href="edit-profile.jsp">Change<br>Profile</a>
 		</div>
 		<div id="profile-edit-content">
-			<a href=""><br>Logout</a>
+			<a href="index.jsp"><br>Logout</a>
 		</div>
 	</div>
 	<br>
