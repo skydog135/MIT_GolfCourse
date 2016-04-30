@@ -31,7 +31,6 @@ form p {
 }
 /*UPDATE CONTENT*/
 form {
-	margin-top: 10%;
 	border-radius: 3px;
 	text-align: left;
 	width: 100%;
@@ -185,13 +184,12 @@ footer {
 	border: solid 1px;
 	border-color: black; 
 	padding: 10px;
-	height: 3%;
+	height: 5%;
 	border-radius: 5px;
 	margin-top: 10px;
 }
 
 #current-user p {
-	font-size: 150%;
 	float: left;
 }
 
@@ -215,9 +213,9 @@ a {
 /* UPDATED CONTENT */
 #current-user input {
 	width: 25%;
-	height: 100%;
+	height: auto;
 	float: right;
-	font-size: 150%;
+	font-size: 125%;
 }
 /* END UPDATED CONTENT */
 

@@ -75,8 +75,10 @@
 	<!-- <input type="submit" value="Add Penalty Stroke"> -->	
 		<br>
 		<br>
-	<!-- JAJ changed wording from "Next Shot" to submit" -->	
+	<!-- JAJ changed wording from "Next Shot" to submit" -->
+		<div id="buttons">
 		<input type="submit" value="Submit">
+		</div>	
 		</div>
 	</form> 
 	<!-- End Updated Content -->

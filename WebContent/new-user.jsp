@@ -16,9 +16,9 @@
 	<h1>New User</h1>
 	<div id="current-user">
 		<p>Already have an account?</p>
-		
-		<input type="submit" value="login">
-			
+		<form action="login.jsp">
+			<input type="submit" value="Login">
+		</form>	
 	</div>
 	<div id="new-user-form">
 	<form action="AddUser" method="post">

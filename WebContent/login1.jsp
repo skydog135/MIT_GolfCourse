@@ -14,8 +14,8 @@
 	<!--UPDATE CONTENT-->
 	<div id="new-user-form">
 	<form action="LoginController" method="post">
-  		<p>Username:
-  		<input type="text" name="username"></p>
+  		<p>Email Address:
+  		<input type="text" name="email"></p>
   		<p>Password:
   		<input type="password" name="password"></p>
 		<div id="buttons">
@@ -24,12 +24,14 @@
 	</form>
 	<form action="index.jsp" method="post">
 		<div id="buttons">
-			<input type="button" value="Back">
+			<input type="submit" value="Back">
 		</div>
 	
 	</form> 
 	</div>
-	
+	<br>
+	<br>
+	<br>
 	<a href="forgot-password.html">Forgot Password?</a>
 	<!--END UPDATED CONTENT-->
 </body>
