@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page import="model.User, java.util.*" language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html lang='en'>
 
@@ -6,6 +6,29 @@
 	<link rel="stylesheet" type="text/css" href="theme.css">
 	<title></title>
 </head>
+<%
+User user = (User) session.getAttribute("user");
+
+String gender = (user.getGender());
+System.out.println(gender);
+String email = (user.getEmail());
+System.out.println(email);
+String firstName = (user.getFirstName());
+String lastName = (user.getLastName());
+String golferHandicapIndex = Float.toString((user.getGolferHandicapIndex()));
+
+String oppositeGender = "";
+
+if (gender.equals("Male")) {
+	oppositeGender = "Female";
+	System.out.println("The opposite gender is Female");
+}else{
+	oppositeGender = "Male";
+	System.out.println("The opposit gender is Male");
+}
+
+
+%>
 <style>
 
 
@@ -17,24 +40,24 @@
 	<div id="new-user-form">
 	<form action="UpdateUser" method="post">
 	<p>Email address associated with account:
-  		<input type="text" name="email"></p>
+  		<input type="text" name="email" value="<%= email %>"></p>
   		<p>Updated Email:
-		<input type="text" name="newEmail"></p>
+		<input type="text" name="newEmail" value="<%= email %>"></p>
   		<p>Updated First Name:
-		<input type="text" name="firstName"></p>
+		<input type="text" name="firstName" value="<%= firstName %>"></p>
   		<p>Updated Last Name:
-  		<input type="text" name="lastName"></p>
+  		<input type="text" name="lastName" value="<%= lastName %>"></p>
 		<p>Updated Gender:
   		<select id="gender" name="gender">
-			<option>Male</option>
-			<option>Female</option>
+			<option><%= gender %></option>
+			<option><%= oppositeGender %></option>
 		</select></p>
 		<p>Updated Handicap:
-  		<input type="text" name="handicap"></p>
-		<p>Updated Password:
-  		<input type="text" name="password"></p>
-		<p>Password<br>Confirmation:
-  		<input type="text" name="password"></p>
+  		<input type="text" name="handicap" value="<%= golferHandicapIndex %>"></p>
+		<p>Updated Password *:
+  		<input type="text" name="password" required></p>
+		<p>Password<br>Confirmation *:
+  		<input type="text" name="password" required></p>
 		<div id="buttons">
 		<br>
 		<br>
