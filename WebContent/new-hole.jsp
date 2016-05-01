@@ -11,7 +11,7 @@
 </head>
 <style>
 	body {
-	background-color: #E0E0E0;
+	background-color: #ffffff;
 	background-size: contain;
   	background-position: center;
 	background-attachment: fixed;
