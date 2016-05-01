@@ -27,7 +27,7 @@
 
 <style>
 	body {
-	background-color: #E0E0E0;
+	background-color: #ffffff;
 	background-size: contain;
   	background-position: center;
 	background-attachment: fixed;
@@ -148,12 +148,12 @@ System.out.println(holeYardsArrayList.size());
 		</div>
 	</div>
 	<div id="yardage">
-		<p>${currentHoleYardage} Yards</p>
+		<p>${currentHoleYardage} Yards From Tee</p>
 	</div>
 	<div id="gps_distance">
 		<p id="distance"></p><!-- zhenxu's change -->
 		<p></p>
-		<button class="btn-primary" onclick="dispatcher('record')">Distance</button><!-- zhenxu's change -->
+		<button class="btn-primary" onclick="dispatcher('record')">Current Distance</button><!-- zhenxu's change -->
 	<div id="hole_info">
 	<p>Total Score:  ${cumulativeShots}</p>
 

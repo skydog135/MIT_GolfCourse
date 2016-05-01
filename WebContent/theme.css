@@ -95,7 +95,10 @@ header img {
 	width: 100%;
 	float: right;
 	margin-top: 15%;
-	display: inline-block;	
+	display: inline-block;
+	background-color: #D3D3D3;
+	opacity: 0.8;
+	border-radius: 5px;	
 }
 
 #hole_number {
@@ -103,40 +106,44 @@ header img {
 	width: 100%;
 	background-color: #B0B0B0;
 	padding-top: 5%;
+	border-radius: 5px;	
 }
 
 #par {
 	height: auto;
 	width: 49%;
 	display: inline-block;
-	background-color: white;
+	background-color: #D3D3D3;
+	opacity: 0.8;
 	float: left;
 	margin-top: 1px;
 	padding-top: 5%;
+	border-radius: 5px;	
 }
 
 #result {
 	height: auto;
 	width: 49%;
 	display: inline-block;
-	background-color: white;
+	background-color: #D3D3D3;
+	opacity: 0.8;
 	float: right;
 	margin-top: 1px;
 	padding-top: 5%;
+	border-radius: 5px;	
 }
 
 #yardage {
 	height: auto;
 	width: 100%;
-	background-color: #ffffff;
-	border: solid 1px;
-	border-color: black;
 	float: right;
 	margin-top: 25%;
 	display: inline-block;
 	padding: 0px;	
 	font-size: 100%;
-	border-radius: 3px;	
+	background-color: #D3D3D3;
+	opacity: 0.8;
+	border-radius: 5px;
 	padding-top: 2%;
 	padding-bottom: 2%;
 }
@@ -173,6 +180,10 @@ footer {
 #footer-button h5 {
 	color: white;
 	line-height: 200%;
+}
+
+#footer-button a {
+	text-decoration: none;
 }
 
 /* UPDATED CONTENT */
