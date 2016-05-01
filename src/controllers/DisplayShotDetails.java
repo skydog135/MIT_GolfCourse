@@ -14,6 +14,7 @@ import dbhelpers.ReadShotQuery;
 
 /**
  * Servlet implementation class DisplayShotDetails
+ ** @author jjewell_000
  */
 @WebServlet(description = "Servlet that controls display of shot details", urlPatterns = { "/DisplayShotDetails" })
 public class DisplayShotDetails extends HttpServlet {

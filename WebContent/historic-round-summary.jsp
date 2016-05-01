@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+	
+    <% String table = (String) session.getAttribute("HistoryRoundSummary");
+    System.out.println("table String is: " + table);
+    %>	
+    	
 <html lang='en'>
 
 <head>
@@ -53,51 +60,30 @@ p {
 	
 	<div id="round-history-header">
 		<p>Round Summary</p>
-		<div id="buttons">
-			<input type="submit" value="Done">	
-		</div>	
+	<div id="buttons">
+					<button type="button" value="Back" onclick="history.back()">Back</button>
+				</div>	
 	</div>
 	<table style="height: 5%;">
 		<tr>
-			<td style="width: 100%; text-align: right; padding-right: 3%">Round Date <a href="">11-02-2015</a></td>
+			<td style="width: 100%; text-align: right; padding-right: 3%">Round Date: ${RoundDate}</td>
 		</tr>
 	</table>
 	<hr>
 	<br>
 	<div id="round-summary-details">
-	<table>
-		<tr>
-			<td>Tee:</td>
-			<td>Bulldog</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>Front:</td>
-			<td>34 (-2)</td>
-			<td><a href="">details</a></td>
-		</tr>
-		<tr>
-			<td>Back:</td>
-			<td>36 (+0)</td>
-			<td><a href="">details</a></td>
-		</tr>
-		<tr>
-			<td>Total:</td>
-			<td>70 (-2)</td>
-			<td></td>
-		</tr>
-	
-	</table>
+	<%= table %>
 	</div>
 	<br>
 	<div id="comments-section">
-	Comments:
+	Comments
 	<div id="comments">
-  		<input type="text" name="comments">
+  		${RoundComments}
 	</div>
 	<div id="buttons" style="width: 100%">
-		<input type="submit" value="Round Stats">	
-
+		<form action="RoundHoleHistory">
+			<input type="submit" value="Hole Details">	
+		</form>
 	</div>
 	</div>
 	

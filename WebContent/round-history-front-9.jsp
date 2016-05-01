@@ -3,7 +3,7 @@
 	
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 	
-    <% String table = (String) session.getAttribute("shotDetailTable");
+    <% String table = (String) session.getAttribute("F9Table");
     System.out.println("table String is: " + table);
     %>	
 	
@@ -12,12 +12,6 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="theme.css">
 	<title></title>
-	<script>
-	function goBack(){
-		window.history.back()
-	}
-	
-	</script>
 </head>
 <style>
 
@@ -28,19 +22,18 @@ tr, td {
 
 </style>
 <body>
-	<h1>Hole ${holeNum}</h1>
-	<h4>Summary </h4>
+	<div id="round-history-header">
+		<p>Round Summary Front 9</p>
+
+	</div>
+	
 	<%= table %>
+	
+	Front 9 | <a href="round-history-back-9.jsp"><span style="color:grey">Back 9</span></a>
 	<div id="comments-section">
-	Comments
-	<div id="comments">
-	${holeCom}
-	<div id="buttons">
-	
-	<button onclick="goBack()">Back</button>
-	
-	</div>
-	</div>
+		<div id="buttons">
+		<button type="button" value="Back" onclick="history.back()">Back</button>
+		</div>
 	</div>
 	
 	

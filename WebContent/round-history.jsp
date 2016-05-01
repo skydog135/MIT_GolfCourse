@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+	
+<% String roundTable = (String) session.getAttribute("RoundTable");
+    System.out.println("table String is: " + roundTable);
+    %>	
+    
 <html lang='en'>
 
 <head>
@@ -55,62 +62,11 @@ p {
 	<div id="round-history-header">
 		<p>Rounds Played</p>
 		<div id="buttons">
-		<input type="submit" value="Done">	
-
+		<form action="new-round.jsp">
+			<input type="submit" value="Done">	
+		</form>
 		</div>	
 	</div>
-	<table style="height: 5%;">
-		<tr>
-			<td>Round Date</td>
-			<td># of Holes</td>
-		</tr>
-	</table>
-	<hr>
-	<table>
-		<tr>
-			<td><a href="">11-16-2015</a></td>
-			<td>18</td>
-		</tr>
-		<tr>
-			<td><a href="">11-09-2015</a></td>
-			<td>09</td>
-		</tr>
-		<tr>
-			<td><a href="">11-09-2015</a></td>
-			<td>09</td>
-		</tr>
-		<tr>
-			<td><a href="">11-02-2015</a></td>
-			<td>18</td>
-		</tr>
-		<tr>
-			<td><a href="">10-26-2015</a></td>
-			<td>09</td>
-		</tr>
-		<tr>
-			<td><a href="">10-26-2015</a></td>
-			<td>09</td>
-		</tr>
-		<tr>
-			<td><a href="">10-19-2015</a></td>
-			<td>18</td>
-		</tr>
-		<tr>
-			<td><a href="">10-12-2015</a></td>
-			<td>09</td>
-		</tr>
-		<tr>
-			<td><a href="">10-12-2015</a></td>
-			<td>09</td>
-		</tr>
-		<tr>
-			<td><a href="">10-05-2015</a></td>
-			<td>18</td>
-		</tr>
-		
-	</table>
-
-	
-	
+	<%= roundTable %>	
 </body>
 </html>
