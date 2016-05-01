@@ -12,12 +12,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="theme.css">
 	<title></title>
-	<script>
-	function goBack(){
-		window.history.back()
-	}
-	
-	</script>
+
 </head>
 <style>
 
@@ -37,7 +32,7 @@ tr, td {
 	${holeCom}
 	<div id="buttons">
 	
-	<button onclick="goBack()">Back</button>
+<button type="button" value="Back" onclick="history.back()">Back</button>
 	
 	</div>
 	</div>
