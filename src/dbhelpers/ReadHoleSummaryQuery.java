@@ -56,8 +56,9 @@ private ResultSet results;
 		
 	}
 	
-	public String getHTMLTable(){
+	public String getHTMLTable(){//this code formats the 9 hole only table
 		String table ="";
+		
 		table += "<table border=1>";
 		
 		try {	
@@ -84,7 +85,7 @@ private ResultSet results;
 			
 			this.results.beforeFirst();
 			System.out.println("Just set hole result set point to before first");
-			
+	
 			while(this.results.next()){
 				DisplayRound dr = new DisplayRound();
 				dr.setDisplayRoundHoleID(this.results.getInt("holeID"));
@@ -97,6 +98,7 @@ private ResultSet results;
 				dr.setDisplayRoundHoleSummaryID(this.results.getInt("roundHoleSummaryID"));
 				dr.setDisplayRoundHoleSummaryComments(this.results.getString("roundHoleSummaryComments"));
 				System.out.println("Hole Comments = " + this.results.getString("roundHoleSummaryComments"));
+				
 			
 				table +="<tr>";
 				table +="<td>";
@@ -130,10 +132,115 @@ private ResultSet results;
 			e.printStackTrace();
 		}
 		
-		table += "</table>";
+		table += "</table>";	
+		
 		System.out.println(table);
 		return table;
 	}
+	
+	public int[] getNineHoleTotals(){//this code calcs the totals for a particular nine hole round
+		int nineHoleTotal=0;
+		int nineHolePar=0;
+
+			System.out.println("In getNineHoleTotals: Just set hole result set point to before first");
+		try {
+			this.results.beforeFirst();
+			
+			while(this.results.next()){
+				nineHoleTotal=nineHoleTotal+(this.results.getInt("roundHoleSummaryGross"));
+				nineHolePar=nineHolePar + (this.results.getInt("holePar"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		int[] nineHoleSummaryArray = new int[6];
+		nineHoleSummaryArray[0]=nineHoleTotal;
+		nineHoleSummaryArray[1]=nineHolePar;
+		nineHoleSummaryArray[2]=(nineHoleTotal - nineHolePar);
+		nineHoleSummaryArray[3]=0;
+		nineHoleSummaryArray[4]=0;
+		nineHoleSummaryArray[5]=0;
+								
+		
+		System.out.println(nineHoleSummaryArray);
+		return nineHoleSummaryArray;
+	}
+	
+	public String getRoundHoleSummaryHTML(int[] HoleSummaryArray, String tee){//this code formats the 9 hole only summary table
+		String holeSummaryTable ="";
+		int F9HoleTotal = HoleSummaryArray[0];
+		int F9HoleOverUnder = HoleSummaryArray[2];
+		int B9HoleTotal = HoleSummaryArray[3];
+		int B9HoleOverUnder = HoleSummaryArray[5];
+		
+		holeSummaryTable += "<table border=1>";
+		
+			
+			holeSummaryTable +="<tr>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += "Tee:";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += tee;
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += "  ";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="</tr>";
+			holeSummaryTable +="<tr>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += " ";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += "Score";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += "Over/Under";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="</tr>";
+			holeSummaryTable +="<tr>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += "Front 9:";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += F9HoleTotal;
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += F9HoleOverUnder;
+			holeSummaryTable +="</td>";		
+			holeSummaryTable +="</tr>";
+			holeSummaryTable +="<tr>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += "Back 9:";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += B9HoleTotal;
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += B9HoleOverUnder;
+			holeSummaryTable +="</td>";		
+			holeSummaryTable +="</tr>";
+			holeSummaryTable +="<tr>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += "Total:";
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += (B9HoleTotal+B9HoleTotal);
+			holeSummaryTable +="</td>";
+			holeSummaryTable +="<td>";
+			holeSummaryTable += (F9HoleOverUnder+B9HoleOverUnder);
+			holeSummaryTable +="</td>";		
+			holeSummaryTable +="</tr>";
+			holeSummaryTable +="</tr>";
+			holeSummaryTable += "</table>";	
+		
+		System.out.println(holeSummaryTable);
+		return holeSummaryTable;
+	}
+	
 
 	public String[] getHTML18Table(){
 		String tableF9 ="";
@@ -209,7 +316,7 @@ private ResultSet results;
 							"<input type='hidden' name='roundHoleSummaryID' value='" + dr.getDisplayRoundHoleSummaryID()+ "'>" +
 							"<input type='hidden' name='holeNum' value='" + dr.getDisplayRoundHoleNumber()+ "'>" +
 							"<input type='hidden' name='holeCom' value='" + dr.getDisplayRoundHoleSummaryComments()+ "'>" +
-							"<input type='submit' value='Details'>" +
+							"<input type='submit' value='+'>" +
 							"</form>";
 					tableF9 +="</td>";		
 					tableF9 +="</tr>";
@@ -292,7 +399,7 @@ private ResultSet results;
 									"<input type='hidden' name='roundHoleSummaryID' value='" + dr.getDisplayRoundHoleSummaryID()+ "'>" +
 									"<input type='hidden' name='holeNum' value='" + dr.getDisplayRoundHoleNumber()+ "'>" +
 									"<input type='hidden' name='holeCom' value='" + dr.getDisplayRoundHoleSummaryComments()+ "'>" +
-									"<input type='submit' value='Details'>" +
+									"<input type='submit' value='+'>" +
 									"</form>";
 							tableB9 +="</td>";		
 							tableB9 +="</tr>";
@@ -314,6 +421,45 @@ private ResultSet results;
 		
 
 		return F9B9TableArray;
+	}
+	
+	public int[] getEighteenHoleTotals(){//this code calcs the totals for a particular 18 hole round
+		int F9HoleTotal=0;
+		int F9HolePar=0;
+		int B9HoleTotal=0;
+		int B9HolePar=0;	
+		int counter = 1;
+
+			System.out.println("In getEighteenHoleTotals: Just set hole result set point to before first");
+		try {
+			this.results.beforeFirst();
+			
+			while(this.results.next()){
+				if (counter < 10){
+				F9HoleTotal=F9HoleTotal+(this.results.getInt("roundHoleSummaryGross"));
+				F9HolePar=F9HolePar + (this.results.getInt("holePar"));
+				} else {
+					B9HoleTotal=B9HoleTotal+(this.results.getInt("roundHoleSummaryGross"));
+					B9HolePar=B9HolePar + (this.results.getInt("holePar"));	
+				}
+				counter = counter +1;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		int[] EighteenHoleSummaryArray = new int[6];
+		EighteenHoleSummaryArray[0]=F9HoleTotal;
+		EighteenHoleSummaryArray[1]=F9HolePar;
+		EighteenHoleSummaryArray[2]=F9HoleTotal-F9HolePar;
+		EighteenHoleSummaryArray[3]=B9HoleTotal;
+		EighteenHoleSummaryArray[4]=B9HolePar;
+		EighteenHoleSummaryArray[5]=B9HoleTotal-B9HolePar;
+								
+		
+		System.out.println(EighteenHoleSummaryArray);
+		return EighteenHoleSummaryArray;
 	}
 	
 }

@@ -37,12 +37,13 @@
 		</div>
 		<br>
 	</form>
-	<!--UPDATED CONTENT:  Julie Jewell 3/9/16 Commenting out History button until we are ready to code-->
-	<!--<form action="History" method="post"></form>-->
-		<!--<br>-->
-		<!--<input type="submit" value="Round History">-->
-		<!--</div>-->
-	<!--</form> -->
+	<!--UPDATED CONTENT:  Julie Jewell 4/30/16 reactivated History Button-->
+	<form action="History" method="post">
+		<div id="buttons">
+		<input type="submit" value="Round History">
+		</div>
+		<br>
+	</form>
 	</div>
 	<!--END UPDATED CONTENT-->
 
