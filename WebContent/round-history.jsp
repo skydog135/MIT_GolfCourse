@@ -34,7 +34,7 @@ table, tr, td {
 }
 
 td {
-	width: 50%;
+	width: 25%;
 }
 
 #buttons {
