@@ -320,7 +320,19 @@ tr, td {
 	font-size: 100%;
 	border-radius: 10px;
 	background-color: #d3d3d3;
+	
 }
+
+#profile-edit-content a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#profile-edit-content a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+
 /*END UPDATED CONTENT*/
 #comments-section {
 	width: 80%;

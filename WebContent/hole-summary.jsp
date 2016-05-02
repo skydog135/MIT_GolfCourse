@@ -14,7 +14,7 @@
 	
 	function setMessage() {
 	if (currentShotNumber > currentHolePar + 3) {
-		document.getElementById("message").innerHTML = "Hey at least you're honest!";
+		document.getElementById("message").innerHTML = "Hey, at least you're honest!";
 	} else {
 		if (currentShotNumber == currentHolePar + 3) {
 			document.getElementById("message").innerHTML = "You made a triple bogey.";
