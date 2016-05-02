@@ -32,7 +32,9 @@ tr, td {
 	${holeCom}
 	<div id="buttons">
 	
+<div id="buttons">	
 <button type="button" value="Back" onclick="history.back()">Back</button>
+</div>
 	
 	</div>
 	</div>

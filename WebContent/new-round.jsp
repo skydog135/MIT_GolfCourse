@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page import="model.User, java.util.*" language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <html lang='en'>
 
@@ -14,6 +14,13 @@
 
 </style>
 
+<%
+User user = (User) session.getAttribute("user");
+
+String firstName = (user.getFirstName());
+
+%>
+
 <body>
 	<div id="profile-edit-toolbar">
 		<div id="profile-edit-content">
@@ -28,6 +35,7 @@
 	<header>
 		<img src="http://www.golfcourse.uga.edu/sites/golfcourse.uga.edu/files/2013%20UGA%20Golf%20logo.png" />
 	</header>
+	<h1>Hello, <%= firstName %></h1>
 	<!--UPDATED CONTENT-->
 	<div id="new-user-form">
 	<!--UPDATED CONTENT:  Julie Jewell 3/9/16 added actions for New Game and div closure-->
