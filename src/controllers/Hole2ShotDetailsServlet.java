@@ -72,6 +72,7 @@ public class Hole2ShotDetailsServlet extends HttpServlet {
 			String lie = request.getParameter("lie");
 			String stringPenaltyStrokes = request.getParameter("penalty-strokes");
 			int currentShotNumber = (Integer) session.getAttribute("currentShotNumber");
+			int currentHolePar = (Integer)session.getAttribute("currentHolePar");
 			
 			int penaltyStrokes = 0;
 			if (!stringPenaltyStrokes.equalsIgnoreCase("0")) {
@@ -89,10 +90,16 @@ public class Hole2ShotDetailsServlet extends HttpServlet {
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			//This section increments game stat variables, if needed
 			
-			//checking to see if we need to increment Fairway in Regulation Counter
-			if (lie.equalsIgnoreCase("Fairway") &&  currentShotNumber==2 ){//then FIR
-				int fir = ((Integer) session.getAttribute("totalFIR"))+1;
-				session.setAttribute("totalFIR",fir);
+			
+			//If par 4 or 5 we need to check if FIR
+			if (currentHolePar > 3) {//then check if FIR
+				
+				//checking to see if we need to increment Fairway in Regulation Counter
+				if (lie.equalsIgnoreCase("Fairway") &&  currentShotNumber==2 ){//then FIR
+					int fir = ((Integer) session.getAttribute("totalFIR"))+1;
+					System.out.println("I'm processing a FIR = " + fir);
+					session.setAttribute("totalFIR",fir);
+				}
 			}
 			
 			//checking to see if we need to increment Green in Regulation Counter
@@ -101,7 +108,7 @@ public class Hole2ShotDetailsServlet extends HttpServlet {
 			//If Par 5, GIR is on in 1
 			
 			if (lie.equalsIgnoreCase("Green")) {//then determine GIR Stroke value
-				int currentHolePar = (Integer)session.getAttribute("currentHolePar");
+
 				int girStrokes = 0;
 				switch (currentHolePar){
 					case 5: girStrokes = 3;
