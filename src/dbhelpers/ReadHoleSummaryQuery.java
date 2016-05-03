@@ -228,7 +228,7 @@ private ResultSet results;
 			holeSummaryTable += "Total:";
 			holeSummaryTable +="</td>";
 			holeSummaryTable +="<td>";
-			holeSummaryTable += (B9HoleTotal+B9HoleTotal);
+			holeSummaryTable += (F9HoleTotal+B9HoleTotal);
 			holeSummaryTable +="</td>";
 			holeSummaryTable +="<td>";
 			holeSummaryTable += (F9HoleOverUnder+B9HoleOverUnder);
@@ -436,9 +436,12 @@ private ResultSet results;
 			
 			while(this.results.next()){
 				if (counter < 10){
+					
+				
 				F9HoleTotal=F9HoleTotal+(this.results.getInt("roundHoleSummaryGross"));
 				F9HolePar=F9HolePar + (this.results.getInt("holePar"));
 				} else {
+								
 					B9HoleTotal=B9HoleTotal+(this.results.getInt("roundHoleSummaryGross"));
 					B9HolePar=B9HolePar + (this.results.getInt("holePar"));	
 				}
